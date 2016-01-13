@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">한마당</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TAB STRING-->
+    <string name="notice">공지사항</string>
+    <string name="club">동아리</string>
+    <string name="date">일정</string>
+
+    <!-- Date String -->
+    <string name="addSchedule">일정추가</string>
+
+</resources>
