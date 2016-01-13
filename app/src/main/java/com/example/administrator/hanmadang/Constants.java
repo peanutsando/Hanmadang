@@ -32,5 +32,6 @@ public class Constants {
 
     public static final String JPEG = ".jpg";
     /*club*/
+    //되라 ㅅㅂ
 
 }
