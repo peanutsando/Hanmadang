@@ -48,7 +48,7 @@
     <com.example.administrator.hanmadang.Tab.Date.CalendarMonthView
         android:id="@+id/monthView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="448dp"
         />
 
 </LinearLayout>

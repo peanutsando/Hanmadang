@@ -2,7 +2,7 @@ package com.example.administrator.hanmadang.Tab.Date;
 
 /**
  * 일자 정보를 담기 위한 클래스 정의
- * 
+ *
  * @author Mike
  *
  */
@@ -11,13 +11,13 @@ public class MonthItem {
 	private int dayValue;
 
 	public MonthItem() {
-		
+
 	}
-	
+
 	public MonthItem(int day) {
 		dayValue = day;
 	}
-	
+
 	public int getDay() {
 		return dayValue;
 	}
@@ -25,7 +25,7 @@ public class MonthItem {
 	public void setDay(int day) {
 		this.dayValue = day;
 	}
-	
-	
-	
+
+
+
 }
