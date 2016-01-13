@@ -8,10 +8,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-/**
- * 그리드뷰를 상속하여 새로운 뷰를 정의한 클래스
- * 선택한 일자를 표시하는 기능등을 효율적으로 처리하기 위해 정의한 클래스임
- */
+ // 그리드뷰를 상속하여 새로운 뷰를 정의한 클래스
+ // 선택한 일자를 표시하는 기능등을 효율적으로 처리하기 위해 정의한 클래스임
 public class CalendarMonthView extends GridView {
 	// 일자 선택을 위해 직접 정의한 리스너 객체
 	private OnDataSelectionListener selectionListener;

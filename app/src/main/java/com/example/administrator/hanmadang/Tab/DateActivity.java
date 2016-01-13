@@ -173,7 +173,7 @@ public class DateActivity extends AppCompatActivity {
 //        int year = data.getExtras().getInt("year", 0);
         if(resultCode == 1){
 //            Toast.makeText(this, "응답으로 전달된 년도" + year, Toast.LENGTH_LONG).show();
-            Toast.makeText(this, "데이터베이스에 저장", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "데이터베이스에 저장.", Toast.LENGTH_LONG).show();
         }
     }
 }

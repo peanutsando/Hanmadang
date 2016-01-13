@@ -12,13 +12,11 @@ public class MonthItemView extends TextView {
 
 	public MonthItemView(Context context) {
 		super(context);
-
 		init();
 	}
 
 	public MonthItemView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
 		init();
 	}
 

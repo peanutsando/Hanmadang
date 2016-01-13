@@ -17,9 +17,6 @@ import com.example.administrator.hanmadang.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * Created by Joguk_1 on 2016-01-11.
- */
 public class AddSchedule extends ActionBarActivity implements View.OnClickListener {
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
     TextView textView1;

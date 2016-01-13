@@ -7,12 +7,9 @@ package com.example.administrator.hanmadang.Tab.Date;
  *
  */
 public class MonthItem {
-
 	private int dayValue;
 
-	public MonthItem() {
-
-	}
+	public MonthItem() {}
 
 	public MonthItem(int day) {
 		dayValue = day;

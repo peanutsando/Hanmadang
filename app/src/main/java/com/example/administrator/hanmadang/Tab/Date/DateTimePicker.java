@@ -39,7 +39,7 @@ public class DateTimePicker extends LinearLayout {
 	// 시간선택 위젯
 	private final TimePicker timePicker;
 
-	//생성자
+	// 생성자
 	public DateTimePicker(final Context context){
 		this(context, null);
 	}

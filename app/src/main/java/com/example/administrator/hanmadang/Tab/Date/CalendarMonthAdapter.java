@@ -143,7 +143,6 @@ public class CalendarMonthAdapter extends BaseAdapter {
 		return result;
 	}
 
-
 	public int getCurYear() {
 		return curYear;
 	}
