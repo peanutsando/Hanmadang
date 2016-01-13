@@ -31,5 +31,6 @@ public class Constants {
     public static final int ACTIVITY_REQUEST_CODE = 1;
 
     public static final String JPEG = ".jpg";
+    /*club*/
 
 }
