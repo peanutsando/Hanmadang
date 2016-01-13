@@ -99,13 +99,19 @@ public class NoticeContent extends AppCompatActivity {
                 for (Element e : contentElement) {
                     if (!e.text().equals("")) {
                         content = content + e.text() + "<br />";
+                    }else{
+                        content = content + "<br />";
                     }
                 }
 
                 contentElement = doc.select(Constants.NOTICE_DIV_VIEW_DIV);
                 for (Element e : contentElement) {
+                    Log.e("", String.valueOf(contentElement.select("b")));
+
                     if (!e.text().equals("")) {
-                        content = content + "<br />" + e.text() + "<br />";
+                        content = content + e.text() + "<br />";
+                    }else{
+                        content = content + "<br />";
                     }
                 }
 
@@ -113,6 +119,8 @@ public class NoticeContent extends AppCompatActivity {
                 for (Element e : contentElement) {
                     if (!e.text().equals("")) {
                         content = content + e.text() + "<br />";
+                    }else{
+                        content = content + "<br />";
                     }
                 }
 
@@ -120,6 +128,8 @@ public class NoticeContent extends AppCompatActivity {
                 for (Element e : contentElement) {
                     if (!e.text().equals("")) {
                         content = content + e.text() + "<br />";
+                    }else{
+                        content = content + "<br />";
                     }
                 }
             } catch (IOException e) {
