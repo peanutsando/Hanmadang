@@ -1,9 +1,11 @@
 package com.example.administrator.hanmadang.Tab.Club;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class WriteListAdapter extends BaseAdapter {
     }
 
     public void addItem(WriteItem item) {
-        mItems.add(item);
+        mItems.add(0, item);
     }
 
     public void setListItems(List<WriteItem> listItem) {
@@ -50,10 +52,11 @@ public class WriteListAdapter extends BaseAdapter {
                 writeView.setTitle;
             }
             */
+
             writeView.setText(0, mItems.get(position).getData(0));
             writeView.setText(1, mItems.get(position).getData(1));
             writeView.setText(2, mItems.get(position).getData(2));
-            }
+        }
 
         return writeView;
     }

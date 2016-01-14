@@ -32,15 +32,15 @@ public class WriteView extends LinearLayout{
         */
         // Set Text 01
         mTitle = (TextView) findViewById(R.id.title);
-        mTitle.setText(aItem.getTitle());
+        mTitle.setText(aItem.getData(0));
 
         // Set Text 02
         mTimestamp = (TextView) findViewById(R.id.timestamp);
-        mTimestamp.setText(aItem.getTimestamp());
+        mTimestamp.setText(aItem.getData(1));
 
         // Set Text 03
         mWriter = (TextView) findViewById(R.id.writer);
-        mWriter.setText(aItem.getWriter());
+        mWriter.setText(aItem.getData(2));
     }
 
     public void setTitle(String title) {

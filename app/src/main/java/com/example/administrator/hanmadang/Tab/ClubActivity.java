@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,9 +29,6 @@ public class ClubActivity extends AppCompatActivity {
 
     ListView listView;
     WriteListAdapter adapter;
-    String writer;
-    String timestamp;
-    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +52,6 @@ public class ClubActivity extends AppCompatActivity {
         adapter = new WriteListAdapter(this);
 
         adapter.addItem(new WriteItem("게시판에 온 것을 환영합니다!", "2016-01-14", "관리자"));
-        adapter.notifyDataSetChanged();
-
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
@@ -64,17 +60,24 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WriteItem curItem = (WriteItem) adapter.getItem(position);
-                String title = curItem.getTitle();
+                String[] curData = curItem.getData();
 
-                Toast.makeText(getApplicationContext(), "Selected : " + title, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Selected : " + curData[0], Toast.LENGTH_LONG).show();
             }
         });
+
+        listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
     }
 
-    public void createListView() {
+    public void createListView(String title, String timestamp, String writer) {
         // 아이템 등록
-        adapter.addItem(new WriteItem(title, timestamp, writer));
-        adapter.notifyDataSetChanged();
+        if(title == null)
+            Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_LONG).show();
+        else {
+            adapter.addItem(new WriteItem(title, timestamp, writer));
+            ((WriteListAdapter)listView.getAdapter()).notifyDataSetInvalidated();
+            Toast.makeText(this, "성공", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -83,13 +86,16 @@ public class ClubActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             switch(requestCode) {
                 case B_ACTIVITY:
+                    String writer;
+                    String timestamp;
+                    String title;
+
                     writer = intent.getExtras().getString("writer");
                     timestamp = intent.getExtras().getString("timestamp");
                     title = intent.getExtras().getString("title");
 
-                    createListView();
-
-                    Toast.makeText(this, "됩니까", Toast.LENGTH_LONG).show();
+                    // 아이템 등록
+                    createListView(title, timestamp, writer);
             }
         }else {
             Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();

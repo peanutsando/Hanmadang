@@ -35,13 +35,16 @@ public class WriteItem {
     public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
     public void setTitle(String title) { this.title = title; }
     public void setWriter(String writer) { this.writer = writer; }
+    public void setData(String[] obj) { this.mData = obj; }
 
     //public void setIcon(Drawable icon) { mIcon = icon; }
 
     // getter
+    /**
     public String getTimestamp() { return timestamp; }
     public String getTitle() { return title; }
     public String getWriter() { return writer; }
+    */
     public String[] getData() { return mData ; }
 
     public String getData(int index) {

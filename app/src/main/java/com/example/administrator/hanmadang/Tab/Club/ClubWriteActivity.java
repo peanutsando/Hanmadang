@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.hanmadang.R;
@@ -26,6 +28,9 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
     SimpleDateFormat curDateFormat;
     String strCurDate;
 
+    EditText inputTitle;
+    String title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,8 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
         writeButton = (Button)findViewById(R.id.writeButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
+
+        inputTitle = (EditText)findViewById(R.id.inputTitle);
     }
 
     private void addListenersToView() {
@@ -61,9 +68,14 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         }else if(v.getId() == R.id.writeButton) {
             extra = new Bundle();
 
+            if(inputTitle.getText().toString().length() == 0)
+                title = null;
+            else
+                title = inputTitle.getText().toString();
+
             extra.putString("writer", "임의");
             extra.putString("timestamp", strCurDate);
-            extra.putString("title", "임의의 제목입니다");
+            extra.putString("title", title);
             intent.putExtras(extra);
             this.setResult(RESULT_OK, intent);
 
