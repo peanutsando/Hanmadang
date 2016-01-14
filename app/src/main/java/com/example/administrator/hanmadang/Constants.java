@@ -1,7 +1,7 @@
 package com.example.administrator.hanmadang;
 
 /**
- * Created by Administrator on 2015-12-25.
+ * Created on Youthink on 2016-01-04
  */
 public class Constants {
     /* NOTICE ACTIVITY */

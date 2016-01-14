@@ -1,7 +1,5 @@
 package com.example.administrator.hanmadang.Tab;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -35,6 +33,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+/**
+ * Created on Youthink on 2016-01-10.
+ */
 
 public class NoticeActivity extends AppCompatActivity {
     private ListView listView;

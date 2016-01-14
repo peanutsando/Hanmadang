@@ -11,6 +11,9 @@ import com.example.administrator.hanmadang.Tab.ClubActivity;
 import com.example.administrator.hanmadang.Tab.DateActivity;
 import com.example.administrator.hanmadang.Tab.NoticeActivity;
 
+/**
+ * Created on Youthink on 2016-01-10.
+ */
 public class MainActivity extends TabActivity{
     private TabHost tabHost = null;
 

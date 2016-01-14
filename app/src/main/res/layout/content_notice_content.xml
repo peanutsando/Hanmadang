@@ -40,16 +40,29 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/attachFile"
+        android:id="@+id/attachTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/contentTitle"
         android:layout_margin="4dp"
         android:paddingLeft="10dip"
-        android:paddingRight="10dip"
+        android:paddingRight="5dip"
         android:paddingTop="1dip"
+        android:text="@string/attach_tag"
         android:textColor="@android:color/secondary_text_dark"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/attachFile"
+        android:layout_toRightOf="@+id/attachTag"
+        android:layout_below="@+id/contentTitle"
+        android:textColor="@android:color/secondary_text_dark"
+        android:layout_margin="4dp"
+        android:paddingRight="10dip"
+        android:paddingTop="1dip"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:layout_below="@+id/attachFile"

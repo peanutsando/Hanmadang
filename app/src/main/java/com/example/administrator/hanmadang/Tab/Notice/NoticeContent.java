@@ -25,6 +25,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Created on Youthink on 2016-01-12.
+ */
 
 public class NoticeContent extends AppCompatActivity {
 
@@ -64,7 +67,7 @@ public class NoticeContent extends AppCompatActivity {
         getImageTask = new GetImageTask();
         getImageTask.execute();
 
-        attachView.setText(Constants.NOTICE_ATTACH_FILE);
+        attachView.setText("첨부파일이 없습니다.(는 아직 미구현)");
     }
 
     @Override

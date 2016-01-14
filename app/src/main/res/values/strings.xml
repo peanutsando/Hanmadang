@@ -9,5 +9,6 @@
 
     <!-- Date String -->
     <string name="addSchedule">일정추가</string>
+    <string name="attach_tag">첨부파일 :</string>
 
 </resources>

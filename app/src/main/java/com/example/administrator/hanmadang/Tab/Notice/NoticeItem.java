@@ -1,8 +1,9 @@
 package com.example.administrator.hanmadang.Tab.Notice;
 
 /**
- * Created by Administrator on 2016-01-10.
+ * Created on Youthink on 2016-01-10.
  */
+
 public class NoticeItem {
     public String number;
     public String title;
