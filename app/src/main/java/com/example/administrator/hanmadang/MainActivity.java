@@ -34,6 +34,9 @@ public class MainActivity extends TabActivity {
 		tabHost.setCurrentTab(0);
 	}
 
+	/**
+	 * Added by Gracefulife ^^
+	 */
 	private void startCivilizationMode() {
 		Toast.makeText(this, "환영하오 낯선이여", Toast.LENGTH_LONG).show();
 		MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.hellounfamiliar);
