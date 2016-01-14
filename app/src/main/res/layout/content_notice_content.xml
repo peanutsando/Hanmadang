@@ -53,6 +53,7 @@
 
     <ImageView
         android:layout_below="@+id/attachFile"
+        android:paddingTop="8dip"
         android:id="@+id/line2"
         android:src="@drawable/line"
         android:layout_width="fill_parent"
