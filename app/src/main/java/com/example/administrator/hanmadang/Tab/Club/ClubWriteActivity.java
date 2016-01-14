@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,20 +18,31 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
     private Button writeButton;
     private Button cancelButton;
 
+    Bundle extra;
+    Intent intent;
+
+    long now;
+    Date date;
+    SimpleDateFormat curDateFormat;
+    String strCurDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //////////
         setContentView(R.layout.activity_club_write);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.e("","들어왔니?");
+
         initViews();
         addListenersToView();
     }
 
-
     private void initViews() {
+        now = System.currentTimeMillis();
+        date = new Date(now);
+        curDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        strCurDate = curDateFormat.format(date);
+
         writeButton = (Button)findViewById(R.id.writeButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
     }
@@ -42,13 +52,21 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         cancelButton.setOnClickListener(this);
     }
 
-
     public void onClick(View v) {
+        intent = getIntent();
+
         if(v.getId() == R.id.cancelButton) {
-            Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_LONG).show();
+            this.setResult(RESULT_CANCELED, intent);
             this.finish();
         }else if(v.getId() == R.id.writeButton) {
-            Toast.makeText(getApplicationContext(), "글쓰기 미구현", Toast.LENGTH_LONG).show();
+            extra = new Bundle();
+
+            extra.putString("writer", "임의");
+            extra.putString("timestamp", strCurDate);
+            extra.putString("title", "임의의 제목입니다");
+            intent.putExtras(extra);
+            this.setResult(RESULT_OK, intent);
+
             this.finish();
         }
     }

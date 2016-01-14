@@ -1,3 +1,4 @@
+
 package com.example.administrator.hanmadang.Tab;
 
 import android.app.Activity;
@@ -21,8 +22,14 @@ import com.example.administrator.hanmadang.Tab.Notice.NoticeItem;
 import java.util.ArrayList;
 
 public class ClubActivity extends AppCompatActivity {
+    private static final int B_ACTIVITY=0;
+
     ListView listView;
     WriteListAdapter adapter;
+    String writer;
+    String timestamp;
+    String title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,28 +42,15 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ClubWriteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, B_ACTIVITY);
             }
         });
         // 어댑터 객체 생성
         listView = (ListView) findViewById(R.id.writeList);
-
-        // 어댑터 객체 생성
         adapter = new WriteListAdapter(this);
 
-        // 아이템 데이터 만들기
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "900 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "1000 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "800 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "700 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "900 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "1000 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "800 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "700 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "900 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "1000 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "800 원"));
-        adapter.addItem(new WriteItem("추억의 테트리스", "30,000 다운로드", "700 원"));
+        adapter.addItem(new WriteItem("게시판에 온 것을 환영합니다!", "2016-01-14", "관리자"));
+        adapter.notifyDataSetChanged();
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
@@ -71,5 +65,30 @@ public class ClubActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Selected : " + title, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void createListView() {
+        // 아이템 등록
+        adapter.addItem(new WriteItem(title, timestamp, writer));
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if(resultCode == RESULT_OK) {
+            switch(requestCode) {
+                case B_ACTIVITY:
+                    writer = intent.getExtras().getString("writer");
+                    timestamp = intent.getExtras().getString("timestamp");
+                    title = intent.getExtras().getString("title");
+
+                    createListView();
+
+                    Toast.makeText(this, "됩니까", Toast.LENGTH_LONG).show();
+            }
+        }else {
+            Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
+        }
     }
 }
