@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.hanmadang.Function.BackKeyHandler;
 import com.example.administrator.hanmadang.R;
 import com.example.administrator.hanmadang.Tab.Date.AddSchedule;
 import com.example.administrator.hanmadang.Tab.Date.CalendarMonthAdapter;
@@ -50,6 +51,7 @@ public class DateActivity extends AppCompatActivity {
 
 public class DateActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_Add = 1001;
+    private BackKeyHandler keyHandler;
 
     //월별 캘린더 뷰 객체
     CalendarMonthView monthView;
@@ -75,7 +77,7 @@ public class DateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_date);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        keyHandler = new BackKeyHandler(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -175,5 +177,10 @@ public class DateActivity extends AppCompatActivity {
 //            Toast.makeText(this, "응답으로 전달된 년도" + year, Toast.LENGTH_LONG).show();
             Toast.makeText(this, "데이터베이스에 저장.", Toast.LENGTH_LONG).show();
         }
+    }
+    /* 뒤로가기 기능 */
+    @Override
+    public void onBackPressed(){
+        keyHandler.onBackPressed();
     }
 }

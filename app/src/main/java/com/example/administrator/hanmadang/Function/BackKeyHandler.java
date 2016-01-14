@@ -1,8 +1,9 @@
 package com.example.administrator.hanmadang.Function;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.example.administrator.hanmadang.Constants;
 
 /**
  * Created by Administrator on 2016-01-06.
@@ -17,7 +18,6 @@ public class BackKeyHandler {
     }
 
     public void onBackPressed(){
-        Log.e(getClass().getSimpleName(), "뒤로가기눌렀을때 if문");
         if(System.currentTimeMillis() > keyPressTime + 2000){
             keyPressTime = System.currentTimeMillis();
             showGuide();
@@ -30,7 +30,7 @@ public class BackKeyHandler {
     }
 
     public void showGuide(){
-        toast = Toast.makeText(activity, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", toast.LENGTH_SHORT);
+        toast = Toast.makeText(activity, Constants.BACK_BTN_CLICK, toast.LENGTH_SHORT);
 
         toast.show();
     }

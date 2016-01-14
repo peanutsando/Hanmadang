@@ -1,5 +1,7 @@
 package com.example.administrator.hanmadang.Tab;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -19,6 +21,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.administrator.hanmadang.Constants;
+import com.example.administrator.hanmadang.Function.BackKeyHandler;
 import com.example.administrator.hanmadang.R;
 import com.example.administrator.hanmadang.Tab.Notice.NoticeContent;
 import com.example.administrator.hanmadang.Tab.Notice.NoticeItem;
@@ -49,6 +52,7 @@ public class NoticeActivity extends AppCompatActivity {
     private ArrayList<String> urlList;
     private NoticeListAdapter<NoticeItem> adapter;
     private int count;
+    private BackKeyHandler keyHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class NoticeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        keyHandler = new BackKeyHandler(this);
         listView = (ListView) findViewById(R.id.noticeList);
         listView.setAdapter(noticeListAdapter);
 
@@ -78,6 +83,11 @@ public class NoticeActivity extends AppCompatActivity {
                 startActivityForResult(intent, Constants.ACTIVITY_REQUEST_CODE);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        keyHandler.onBackPressed();
     }
 
     private boolean isInternet() {

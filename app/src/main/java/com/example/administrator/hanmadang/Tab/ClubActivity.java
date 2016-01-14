@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.administrator.hanmadang.Function.BackKeyHandler;
 import com.example.administrator.hanmadang.Tab.Club.ClubWriteActivity;
 import com.example.administrator.hanmadang.R;
 import com.example.administrator.hanmadang.Tab.Club.WriteItem;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class ClubActivity extends AppCompatActivity {
     private static final int B_ACTIVITY=0;
+    private BackKeyHandler keyHandler;
 
     ListView listView;
     WriteListAdapter adapter;
@@ -36,6 +38,8 @@ public class ClubActivity extends AppCompatActivity {
         setContentView(R.layout.activity_club);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        keyHandler = new BackKeyHandler(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,5 +94,10 @@ public class ClubActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        keyHandler.onBackPressed();
     }
 }

@@ -3,19 +3,16 @@ package com.example.administrator.hanmadang;
 import android.app.TabActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
-import com.example.administrator.hanmadang.Function.BackKeyHandler;
 import com.example.administrator.hanmadang.Tab.ClubActivity;
 import com.example.administrator.hanmadang.Tab.DateActivity;
 import com.example.administrator.hanmadang.Tab.NoticeActivity;
 
 public class MainActivity extends TabActivity{
     private TabHost tabHost = null;
-    private BackKeyHandler keyHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +26,6 @@ public class MainActivity extends TabActivity{
         tabHost.addTab(tabHost.newTabSpec("Date").setIndicator(getString(R.string.date)).setContent(new Intent(this, DateActivity.class)));
 
         tabHost.setCurrentTab(0);
-        keyHandler = new BackKeyHandler(this);
-    }
-
-    @Override
-    public void onBackPressed(){
-        Log.e(getClass().getSimpleName(), "뒤로가기눌러보자");
-        keyHandler.onBackPressed();
     }
 
     @Override

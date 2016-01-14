@@ -31,7 +31,8 @@ public class Constants {
     public static final int ACTIVITY_REQUEST_CODE = 1;
 
     public static final String JPEG = ".jpg";
-    /*club*/
-    //되라 ㅅㅂ 제발 좀 되 시발 ㅜㅠsadfasdasdfasdf
+
+    /* BackKeyHandler */
+    public static final String BACK_BTN_CLICK = "\'뒤로\'버튼을 한번 더 누르시면 종료 됩니다.";
 
 }
