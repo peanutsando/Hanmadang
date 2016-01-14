@@ -10,29 +10,23 @@ import com.example.administrator.hanmadang.Constants;
  */
 
 public class BackKeyHandler {
-    private long keyPressTime = 0;
-    private Toast toast;
-    private Activity activity;
+	private long keyPressTime = 0;
+	private Activity activity;
 
-    public BackKeyHandler(Activity context){
-        this.activity = context;
-    }
+	public BackKeyHandler(Activity context) {
+		this.activity = context;
+	}
 
-    public void onBackPressed(){
-        if(System.currentTimeMillis() > keyPressTime + 2000){
-            keyPressTime = System.currentTimeMillis();
-            showGuide();
-            return;
-        }
-        if(System.currentTimeMillis() <= keyPressTime + 2000){
-            activity.finish();
-            toast.cancel();
-        }
-    }
+	public void onBackPressed() {
+		if (System.currentTimeMillis() > keyPressTime + 2000) {
+			keyPressTime = System.currentTimeMillis();
+			showGuide();
+		} else if (System.currentTimeMillis() <= keyPressTime + 2000) {
+			activity.finish();
+		}
+	}
 
-    public void showGuide(){
-        toast = Toast.makeText(activity, Constants.BACK_BTN_CLICK, toast.LENGTH_SHORT);
-
-        toast.show();
-    }
+	public void showGuide() {
+		Toast.makeText(activity, Constants.BACK_BTN_CLICK, Toast.LENGTH_SHORT).show();
+	}
 }
