@@ -33,7 +33,7 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_chooser);
-        calCurrentDate();
+        calCurrentTime();
 
         textView1 = (TextView)findViewById(R.id.textView1);
         dateTimePicker = (DateTimePicker)findViewById(R.id.dateTimePicker);
@@ -73,7 +73,7 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         // 현재 시간 텍스트뷰에 표시
         Calendar calendar = Calendar.getInstance();
 //      calendar.set(dateTimePicker.getYear(), dateTimePicker.getMonth(), dateTimePicker.getDayOfMonth(), dateTimePicker.getCurrentHour(), dateTimePicker.getCurrentMinute());
-        calendar.set(selectedYear, selectedMonth, selectedDay, currentHour, currentMinute);
+        calendar.set(getIntent().getIntExtra("selectedYear",0), getIntent().getIntExtra("selectedMonth",0), getIntent().getIntExtra("selectedDay",0), currentHour, currentMinute);
         textView1.setText(dateFormat.format(calendar.getTime()));
 
     }
@@ -83,12 +83,12 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         cancelButton = (Button)findViewById(R.id.cancelButton);
     }
 
-    // 현재 날짜 계산하기
-    private void calCurrentDate(){
+    // 현재 시간 계산하기
+    private void calCurrentTime(){
         Calendar calendar = Calendar.getInstance();
-        selectedYear = calendar.get(calendar.YEAR);
-        selectedMonth = calendar.get(calendar.MONTH);
-        selectedDay = calendar.get(calendar.DATE);
+//        selectedYear = calendar.get(calendar.YEAR);
+//        selectedMonth = calendar.get(calendar.MONTH);
+//        selectedDay = calendar.get(calendar.DATE);
         currentHour = calendar.get(calendar.HOUR_OF_DAY)-10;
         currentMinute = calendar.get(calendar.MINUTE);
     }
@@ -100,13 +100,12 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
 
     public void onClick(View v) {
         if(v.getId() == R.id.cancelButton) {
+            setResult(2, resultIntent);
             finish();
         }else if(v.getId() == R.id.addButton) {
             Intent resultIntent = new Intent();
             setResult(1, resultIntent);
             finish();
-
-//            Toast.makeText(this, "미구현", Toast.LENGTH_LONG).show();
         }
     }
 

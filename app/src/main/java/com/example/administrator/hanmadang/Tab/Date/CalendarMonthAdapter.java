@@ -228,7 +228,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 	}
 
 	// get day count for each month
-	private int getMonthLastDay(int year, int month){
+	public int getMonthLastDay(int year, int month){
 		switch (month) {
 			case 0:
 			case 2:
@@ -238,7 +238,6 @@ public class CalendarMonthAdapter extends BaseAdapter {
 			case 9:
 			case 11:
 				return (31);
-
 			case 3:
 			case 5:
 			case 8:

@@ -23,34 +23,12 @@ import com.example.administrator.hanmadang.Tab.Date.CalendarMonthAdapter;
 import com.example.administrator.hanmadang.Tab.Date.CalendarMonthView;
 import com.example.administrator.hanmadang.Tab.Date.MonthItem;
 import com.example.administrator.hanmadang.Tab.Date.OnDataSelectionListener;
+import com.example.administrator.hanmadang.Tab.Date.SelectSchedule;
 
 import java.util.Calendar;
 
-/*
 public class DateActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_date);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "일정추가는 아직미구현", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-}
-*/
-
-public class DateActivity extends AppCompatActivity {
-    public static final int REQUEST_CODE_Add = 1001;
+    public static final int REQUEST_CODE_ADD = 1001;
     private BackKeyHandler keyHandler;
 
     //월별 캘린더 뷰 객체
@@ -79,6 +57,8 @@ public class DateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         keyHandler = new BackKeyHandler(this);
 
+        initDate();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +68,7 @@ public class DateActivity extends AppCompatActivity {
                     intent.putExtra("selectedYear", selectedYear);
                     intent.putExtra("selectedMonth", selectedMonth);
                     intent.putExtra("selectedDay", selectedDay);
-                    startActivityForResult(intent, REQUEST_CODE_Add);
+                    startActivityForResult(intent, REQUEST_CODE_ADD);
                 }catch(ActivityNotFoundException ex){
                     Toast.makeText(getBaseContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -107,9 +87,19 @@ public class DateActivity extends AppCompatActivity {
             public void onDataSelected(AdapterView parent, View v, int position, long id) {
                 // 현재 선택한 일자 정보 표시
                 MonthItem curItem = (MonthItem) monthViewAdapter.getItem(position);
-                selectedYear = monthViewAdapter.getCurYear();
-                selectedMonth = monthViewAdapter.getCurMonth();
-                selectedDay = curItem.getDay();
+
+                // 날짜 없는 탭을 누를 경우 엑티비티 실행 X
+                if(curItem.getDay() != 0) {
+                    selectedYear = monthViewAdapter.getCurYear();
+                    selectedMonth = monthViewAdapter.getCurMonth();
+                    selectedDay = curItem.getDay();
+
+                    Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
+                    intent.putExtra("selectedYear", selectedYear);
+                    intent.putExtra("selectedMonth", selectedMonth);
+                    intent.putExtra("selectedDay", selectedDay);
+                    startActivityForResult(intent, REQUEST_CODE_ADD);
+                }
             }
         });
 
@@ -120,6 +110,7 @@ public class DateActivity extends AppCompatActivity {
         Button monthPrevious = (Button) findViewById(R.id.monthPrevious);
         monthPrevious.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                selectedMonth--;
                 monthViewAdapter.setPreviousMonth();
                 monthViewAdapter.notifyDataSetChanged();
 
@@ -131,6 +122,7 @@ public class DateActivity extends AppCompatActivity {
         Button monthNext = (Button) findViewById(R.id.monthNext);
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                selectedMonth++;
                 monthViewAdapter.setNextMonth();
                 monthViewAdapter.notifyDataSetChanged();
 
@@ -138,6 +130,13 @@ public class DateActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initDate(){
+        Calendar calendar = Calendar.getInstance();
+        selectedYear = calendar.get(calendar.YEAR);
+        selectedMonth = calendar.get(calendar.MONTH);
+        selectedDay = calendar.get(calendar.DATE)+1;
     }
 
     // 월 표시 텍스트 설정
@@ -172,12 +171,18 @@ public class DateActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-//        int year = data.getExtras().getInt("year", 0);
         if(resultCode == 1){
 //            Toast.makeText(this, "응답으로 전달된 년도" + year, Toast.LENGTH_LONG).show();
             Toast.makeText(this, "데이터베이스에 저장.", Toast.LENGTH_LONG).show();
+            initDate();
+        }else if(resultCode == 2){
+            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
+            initDate();
+        }else if(resultCode == 3){
+            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
         }
     }
+
     /* 뒤로가기 기능 */
     @Override
     public void onBackPressed(){
