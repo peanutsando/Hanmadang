@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.administrator.hanmadang.R;
 import com.example.administrator.hanmadang.Tab.ClubActivity;
+import com.example.administrator.hanmadang.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +37,10 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
     // 작성자 선택 textView
     TextView selectWriter;
 
+    // Key 필드
+    EditText keyFiled;
+    Button keyButton;
+
     // ClubActivity 로 전달하는 제목, 날짜, 작성자
     String title;
     String writer;
@@ -53,7 +58,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void DialogRadio() {
-        final CharSequence[] writerList = {"AO", "인클루드", "한울"};
+        final String[] writerList = {"AO", "인클루드", "한울"};
         AlertDialog.Builder alt_builder = new AlertDialog.Builder(this);
 
         alt_builder.setIcon(R.drawable.icon);
@@ -66,7 +71,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
                 selectWriter.setText(writerList[which]);
 
-                writer = writerList[which].toString();
+                writer = writerList[which];
             }
         });
 
@@ -84,18 +89,25 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         // 글쓰기, 취소 버튼
         writeButton = (Button)findViewById(R.id.writeButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
+        writeButton.setEnabled(false);
+        writeButton.setFocusable(false);
 
         // 제목 입력 EditText
         inputTitle = (EditText)findViewById(R.id.inputTitle);
 
         // 작성자 선택 textView
         selectWriter = (TextView)findViewById(R.id.inputWriter);
+
+        // key EditText
+        keyFiled = (EditText)findViewById(R.id.inputKey);
+        keyButton = (Button)findViewById(R.id.keyButton);
     }
 
     private void addListenersToView() {
         writeButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
         selectWriter.setOnClickListener(this);
+        keyButton.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -121,7 +133,35 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             this.finish();
         }else if(v.getId() == R.id.inputWriter) {
             DialogRadio();
-            Toast.makeText(getApplicationContext(), "텍스트뷰 터치", Toast.LENGTH_LONG).show();
+        }else if(v.getId() == R.id.keyButton) {
+            if(writer.equals("AO")) {
+                if(keyFiled.getText().toString().equals(Constants.CLUB_AO)) {
+                    Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+
+                    writeButton.setEnabled(true);
+                    writeButton.setFocusable(true);
+                }else {
+                    Toast.makeText(getApplicationContext(), "AO에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+                }
+            }else if(writer.equals("인클루드")) {
+                if(keyFiled.getText().toString().equals(Constants.CLUB_INCLUDE)) {
+                    Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+
+                    writeButton.setEnabled(true);
+                    writeButton.setFocusable(true);
+                }else {
+                    Toast.makeText(getApplicationContext(), "인클루드에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+                }
+            }else if(writer.equals("한울")) {
+                if(keyFiled.getText().toString().equals(Constants.CLUB_HANWOOL)) {
+                    Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+
+                    writeButton.setEnabled(true);
+                    writeButton.setFocusable(true);
+                }else {
+                    Toast.makeText(getApplicationContext(), "한울에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+                }
+            }
         }
     }
 }
