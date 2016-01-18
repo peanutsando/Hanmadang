@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.administrator.hanmadang.Function.BackKeyHandler;
+import com.example.administrator.hanmadang.Tab.Club.ClubReadActivity;
 import com.example.administrator.hanmadang.Tab.Club.ClubWriteActivity;
 import com.example.administrator.hanmadang.R;
 import com.example.administrator.hanmadang.Tab.Club.WriteItem;
@@ -58,10 +59,14 @@ public class ClubActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /**
                  WriteItem curItem = (WriteItem) adapter.getItem(position);
                  String[] curData = curItem.getData();
 
                  Toast.makeText(getApplicationContext(), "Selected : " + curData[0], Toast.LENGTH_LONG).show();
+                 */
+                Intent intent = new Intent(getApplicationContext(), ClubReadActivity.class);
+                startActivity(intent);
             }
         });
     }
