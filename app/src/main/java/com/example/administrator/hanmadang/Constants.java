@@ -35,4 +35,8 @@ public class Constants {
     /* BackKeyHandler */
     public static final String BACK_BTN_CLICK = "\'뒤로\'버튼을 한번 더 누르시면 종료 됩니다.";
 
+    /* Key SETTING */
+    public static final String CLUB_AO = "#ao0000";
+    public static final String CLUB_INCLUDE = "#in0000";
+    public static final String CLUB_HANWOOL = "#ha0000";
 }

@@ -23,7 +23,7 @@
 
     // 경계선
     <TextView
-        android:id="@+id/borderLine"
+        android:id="@+id/write_borderLine"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_below="@id/showCategory"
@@ -36,7 +36,7 @@
         android:id="@+id/titleLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/borderLine"
+        android:layout_below="@id/write_borderLine"
         android:padding="10dp">
         <TextView
             android:id="@+id/title"
@@ -63,10 +63,50 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/borderLine2"
+        android:id="@+id/write_borderLine2"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_below="@id/titleLayout"
+        android:background="#a9a9a9"
+        android:layout_marginTop="3dp"
+        />
+
+    // 작성자
+    <RelativeLayout
+        android:id="@+id/writerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/write_borderLine2"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingLeft="4dp"
+            android:text="작성자 "
+            android:textColor="#ff222222"
+            android:textSize="18dp"
+            android:drawableRight="@drawable/check"
+            />
+
+        <TextView
+            android:id="@+id/inputWriter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/writer"
+            android:layout_alignBaseline="@id/writer"
+            android:layout_marginLeft="7dp"
+            android:hint="  눌러서 선택해주세요."
+            />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/write_borderLine3"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/writerLayout"
         android:background="#a9a9a9"
         android:layout_marginTop="3dp"
         />
@@ -75,7 +115,7 @@
         android:id="@+id/contentLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleLayout"
+        android:layout_below="@id/writerLayout"
         android:padding="10dp">
         <TextView
             android:id="@+id/content"
@@ -86,7 +126,6 @@
             android:text="내용 "
             android:textColor="#ff222222"
             android:textSize="18dp"
-            android:drawableRight="@drawable/check"
             />
 
         <EditText
@@ -95,7 +134,7 @@
             android:layout_toRightOf="@id/content"
             android:layout_alignBaseline="@id/content"
             android:layout_marginLeft="7dp"
-            android:lines="14" android:gravity="top|left" android:inputType="textMultiLine"
+            android:lines="10" android:gravity="top|left" android:inputType="textMultiLine"
             android:scrollHorizontally="false"
             android:minWidth="10.0dip"
             android:maxWidth="5.0dip"
@@ -103,8 +142,9 @@
             />
     </RelativeLayout>
 
+
     <TextView
-        android:id="@+id/borderLine3"
+        android:id="@+id/write_borderLine4"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_below="@id/contentLayout"
@@ -112,11 +152,52 @@
         android:layout_marginTop="3dp"
         />
 
+    // 키
+    <RelativeLayout
+        android:id="@+id/keyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contentLayout"
+        android:layout_marginTop="15dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingLeft="4dp"
+            android:text="키 입력 "
+            android:textColor="#ff222222"
+            android:textSize="18dp"
+            />
+
+        <EditText
+            android:id="@+id/inputKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/key"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:background="@drawable/round"
+            android:hint=" 키를 입력하세요"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/keyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/inputKey"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBaseline="@id/inputKey"
+            android:text="확인"
+            />
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/borderLine3"
+        android:layout_below="@id/keyLayout"
         android:padding="10dp">
 
         <Button
@@ -124,7 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="글쓰기"
             android:gravity="center_horizontal"
             />
@@ -134,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/writeButton"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="취소"
             android:gravity="center_horizontal"
             />

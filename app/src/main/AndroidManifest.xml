@@ -47,6 +47,11 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
+            android:name=".Tab.Club.ClubReadActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
             android:name=".Tab.Date.AddSchedule"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
