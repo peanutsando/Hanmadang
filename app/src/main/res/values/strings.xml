@@ -11,4 +11,24 @@
     <string name="addSchedule">일정추가</string>
     <string name="attach_tag">첨부파일 :</string>
 
+    <!-- Setting String-->
+    <string name="title_activity_setting">설정</string>
+    <string name="notifications">수신방법</string>
+
+    <string name="ringtone">벨</string>
+    <string name="silent">무음</string>
+    <string name="vibrate">진동</string>
+    <string name="title_activity_settings">설정</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">알림설정</string>
+
+    <string name="pref_title_new_message_notifications">알림수신</string>
+
+    <string name="pref_title_ringtone">벨</string>
+    <string name="pref_title_silent">무음</string>
+    <string name="pref_title_vibrate">진동</string>
+
+
+
 </resources>

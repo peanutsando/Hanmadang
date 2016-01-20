@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
+import com.example.administrator.hanmadang.Function.settings.SettingsActivity;
 import com.example.administrator.hanmadang.Tab.ClubActivity;
 import com.example.administrator.hanmadang.Tab.DateActivity;
 import com.example.administrator.hanmadang.Tab.NoticeActivity;
@@ -47,7 +48,8 @@ public class MainActivity extends TabActivity{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
