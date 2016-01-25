@@ -33,6 +33,9 @@ public class CalendarMonthView extends GridView {
 		setBackgroundColor(Color.GRAY);
 		setVerticalSpacing(1);
 		setHorizontalSpacing(1);
+
+		setLayoutParams(new GridView.LayoutParams(85,200));
+
 		setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 
 		// 칼럼의 갯수 설정

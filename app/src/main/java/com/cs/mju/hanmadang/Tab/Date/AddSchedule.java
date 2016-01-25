@@ -87,7 +87,7 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
 //        selectedYear = calendar.get(calendar.YEAR);
 //        selectedMonth = calendar.get(calendar.MONTH);
 //        selectedDay = calendar.get(calendar.DATE);
-        currentHour = calendar.get(calendar.HOUR_OF_DAY)-10;
+        currentHour = calendar.get(calendar.HOUR_OF_DAY);
         currentMinute = calendar.get(calendar.MINUTE);
     }
 
