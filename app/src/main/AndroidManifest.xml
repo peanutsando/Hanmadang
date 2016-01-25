@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.administrator.hanmadang" >
+    package="com.cs.mju.hanmadang" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.cs.mju.hanmadang.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -22,47 +22,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Tab.NoticeActivity"
+            android:name="com.cs.mju.hanmadang.Tab.NoticeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.Notice.NoticeContent"
+            android:name="com.cs.mju.hanmadang.Tab.Notice.NoticeContent"
             android:label="@string/notice"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.ClubActivity"
+            android:name="com.cs.mju.hanmadang.Tab.ClubActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.Club.ClubWriteActivity"
+            android:name="com.cs.mju.hanmadang.Tab.Club.ClubWriteActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.DateActivity"
+            android:name="com.cs.mju.hanmadang.Tab.DateActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.Club.ClubReadActivity"
+            android:name="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.Date.AddSchedule"
+            android:name="com.cs.mju.hanmadang.Tab.Date.AddSchedule"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Tab.Date.SelectSchedule"
+            android:name="com.cs.mju.hanmadang.Tab.Date.SelectSchedule"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Function.settings.SettingsActivity"
+            android:name="com.cs.mju.hanmadang.Function.settings.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
     </application>
