@@ -16,6 +16,10 @@ import com.cs.mju.hanmadang.R;
 public class ClubReadActivity extends AppCompatActivity implements View.OnClickListener  {
     private TextView content;
     private Button button;
+    private TextView title;
+    private TextView writer;
+
+    private final String URL_LINK = "http://117.17.158.234:8080/Hanmadang/ClubController";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +28,12 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // 초기화, 이벤트 등록
         initViews();
         addListenersToView();
+
+        // 저장된 게시글 데이터를 가져옴
+        loadData();
     }
 
     private void initViews() {
@@ -36,6 +44,8 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         content.setMovementMethod(new ScrollingMovementMethod());
 
         button = (Button)findViewById(R.id.okButton);
+        title = (TextView)findViewById(R.id.inputTitle);
+        writer = (TextView)findViewById(R.id.inputWriter);
     }
 
     private void addListenersToView() {
@@ -46,5 +56,15 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         if(v.getId() == R.id.okButton) {
             finish();
         }
+    }
+
+    private void loadData() {
+        // 파싱할 URL에서 JSON을 객체로
+        JSONParser jsonParser = new JSONParser();
+        jsonParser.parseJSONFromURL(URL_LINK);
+
+        title.setText(jsonParser.object.get(0).getB_title());
+        content.setText(jsonParser.object.get(0).getB_content());
+        writer.setText(jsonParser.object.get(0).getB_writer());
     }
 }
