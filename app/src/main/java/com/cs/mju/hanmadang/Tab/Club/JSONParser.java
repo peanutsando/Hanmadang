@@ -16,7 +16,7 @@ import java.util.List;
  * Created by park on 2016-01-26.
  */
 public class JSONParser {
-    List<User> object;
+    public List<User> object;
 
     public JSONParser() {
     }

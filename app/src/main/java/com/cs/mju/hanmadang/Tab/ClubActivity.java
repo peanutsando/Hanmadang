@@ -11,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.BackKeyHandler;
 import com.cs.mju.hanmadang.Tab.Club.ClubReadActivity;
 import com.cs.mju.hanmadang.Tab.Club.ClubWriteActivity;
 import com.cs.mju.hanmadang.R;
+import com.cs.mju.hanmadang.Tab.Club.JSONParser;
 import com.cs.mju.hanmadang.Tab.Club.WriteItem;
 import com.cs.mju.hanmadang.Tab.Club.WriteListAdapter;
 
@@ -47,11 +49,14 @@ public class ClubActivity extends AppCompatActivity {
                 startActivityForResult(intent, WRITE_ACTIVITY);
             }
         });
+
+        loadData();
+
         // 어댑터 객체 생성
         listView = (ListView) findViewById(R.id.writeList);
         adapter = new WriteListAdapter(this);
 
-        adapter.addItem(new WriteItem("게시판에 온 것을 환영합니다!", "2016-01-14", "관리자"));
+        adapter.addItem(new WriteItem(title, timestamp, writer));
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
@@ -100,6 +105,15 @@ public class ClubActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void loadData() {
+        JSONParser jsonParser = new JSONParser();
+        jsonParser.parseJSONFromURL(Constants.CLUB_URL);
+
+        title = jsonParser.object.get(0).getB_title();
+        writer = jsonParser.object.get(0).getB_writer();
+        timestamp = jsonParser.object.get(0).getB_timestamp();
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
 
 /**
@@ -18,8 +19,6 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
     private Button button;
     private TextView title;
     private TextView writer;
-
-    private final String URL_LINK = "http://117.17.158.234:8080/Hanmadang/ClubController";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
     private void loadData() {
         // 파싱할 URL에서 JSON을 객체로
         JSONParser jsonParser = new JSONParser();
-        jsonParser.parseJSONFromURL(URL_LINK);
+        jsonParser.parseJSONFromURL(Constants.CLUB_URL);
 
         title.setText(jsonParser.object.get(0).getB_title());
         content.setText(jsonParser.object.get(0).getB_content());

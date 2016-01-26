@@ -82,7 +82,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         // 날짜 변수 초기화
         now = System.currentTimeMillis();
         date = new Date(now);
-        curDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        curDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.0");
         strCurDate = curDateFormat.format(date);
 
         // 글쓰기, 취소 버튼
