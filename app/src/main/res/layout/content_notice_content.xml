@@ -58,7 +58,7 @@
         android:layout_below="@+id/contentTitle"
         android:layout_margin="4dp"
         android:paddingRight="10dip"
-        android:textColor="#040404"
+        android:textColor="@android:color/secondary_text_dark"
         android:paddingTop="1dip"
         android:textStyle="bold"
         android:layout_width="wrap_content"
