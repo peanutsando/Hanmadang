@@ -159,14 +159,6 @@ public class NoticeActivity extends AppCompatActivity {
                 timestamp = new ArrayList<String>();
                 urlList = new ArrayList<String>();
 
-                /*Elements urlm = doc.select("li > a[href]");
-                for (Element e : urlm){
-                    Log.e("div paging", e.attr("abs:href"));
-                    if(e.tagName().equals("a")) {
-                        Log.e("a Tag", e.text());
-                    }
-                }*/
-
                 Elements titleElement = doc.select(Constants.TITLE_ELEMENT);
                 for (Element e : titleElement) {
                     title.add(String.valueOf(e.text()));
@@ -183,7 +175,7 @@ public class NoticeActivity extends AppCompatActivity {
                     timestamp.add(String.valueOf(e.text()));
                 }
 
-                Elements urlElement = doc.select(Constants.NOTICE_URL_ELEMENT);
+                Elements urlElement = doc.select(Constants.CHECK_URL_ELEMENT);
                 for(Element e : urlElement){
                     if(!e.text().equals("")){
                         urlList.add(String.valueOf(e.attr(Constants.HREF_ELEMENT)));

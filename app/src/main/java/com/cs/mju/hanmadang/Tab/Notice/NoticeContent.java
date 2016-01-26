@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.content.Intent;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created on Youthink on 2016-01-12.
@@ -32,11 +35,14 @@ import java.util.ArrayList;
 public class NoticeContent extends AppCompatActivity {
 
     private String url, title, timestamp, content = "";
+    private String attachFileURL;
+    private String[] array;
     private ArrayList<String> imageURL;
     private TextView titleView, timestampView, contentView, attachView;
     private ImageView contentImage;
     private GetContentTask getContentTask;
     private GetImageTask getImageTask;
+    private GetAttachFileTask getAttachFileTask;
 
     private PhotoViewAttacher photoViewAttacher;
 
@@ -67,29 +73,43 @@ public class NoticeContent extends AppCompatActivity {
         getImageTask = new GetImageTask();
         getImageTask.execute();
 
-        attachView.setText("첨부파일이 없습니다.(는 아직 미구현)");
+        getAttachFileTask = new GetAttachFileTask();
+        getAttachFileTask.execute();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    class GetAttachFileTask extends AsyncTask<Void, Void, String>{
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(array[1].equals("첨부파일이")){
+                attachView.setText(Constants.NOT_ATTACH_FILE);
+            }else{
+                attachView.setText(Html.fromHtml("<a href=" + attachFileURL + ">" + array[1] + "</a>"));
+                attachView.setMovementMethod(LinkMovementMethod.getInstance());
+            }
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        protected String doInBackground(Void... voids) {
+            String senetence = "";
+            try{
+                Document doc = Jsoup.connect(url).get();
+
+                Elements fileElement = doc.select(Constants.ATTACH_FILE_ELEMENT);
+                senetence = fileElement.text();
+                array = senetence.split(" ");
+
+                if(!(array[1]).equals(Constants.NON_ATTACH_FILE)) {
+                    Elements urlElement = doc.select(Constants.CHECK_URL_ELEMENT);
+                    attachFileURL = urlElement.attr(Constants.HREF_ELEMENT);
+                }
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     class GetContentTask extends AsyncTask<Void, Void, String> {
