@@ -88,6 +88,9 @@ public class NoticeContent extends AppCompatActivity {
                 attachView.setText(Html.fromHtml("<a href=" + attachFileURL + ">" + array[1] + "</a>"));
                 attachView.setMovementMethod(LinkMovementMethod.getInstance());
             }
+
+            attachView.setText(Html.fromHtml("<a href=\"www.naver.com\">" + "네이버" + "</a>"));
+            attachView.setMovementMethod(LinkMovementMethod.getInstance());
         }
 
         @Override
