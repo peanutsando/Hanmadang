@@ -1,5 +1,3 @@
-
-
 package com.cs.mju.hanmadang.Tab.Club;
 
 import android.app.AlertDialog;
@@ -52,7 +50,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
     // DB에 저장할 내용들 및 ClubActivity 로 전달하는 title, writer, strCurDate (글목록 표시 위해)
     String title;   // 제목
-    String writer = "";  // 작성자
+    String writer;  // 작성자
     String strCurDate;  // 날짜
     String password;
     String content;
@@ -69,7 +67,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void DialogRadio() {
-        final String[] writerList = {"AO", "인클루드", "한울"};
+        final String[] writerList = {"AO", "인클루드", "한울", "SAT", "ICUNIX", "NEXT", "MAP", "그리고", "COSCI", "OS"};
         AlertDialog.Builder alt_builder = new AlertDialog.Builder(this);
 
         alt_builder.setIcon(R.drawable.icon);
@@ -130,94 +128,174 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             this.setResult(RESULT_CANCELED, intent);
             this.finish();
         }else if(v.getId() == R.id.writeButton) {
-            /** ClubActivity 로 전송할 내용들 (바로 적용시키기 위하여) */
-            intent = getIntent();
-            extra = new Bundle();
-
-            if(inputTitle.getText().toString().length() == 0)
-                title = null;
-            else
-                title = inputTitle.getText().toString();
-
-            extra.putString("writer", writer);
-            extra.putString("timestamp", strCurDate);
-            extra.putString("title", title);
-            intent.putExtras(extra);
-            this.setResult(RESULT_OK, intent);
-
-            if(inputContent.getText().toString().length() == 0)
-                Toast.makeText(getApplicationContext(),  "내용 0으로 입력", Toast.LENGTH_LONG).show();
-            else
-                content = inputContent.getText().toString();
-
-            /** 서버에 데이터 전송 */
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        URL url = new URL(Constants.CLUB_SAVE_URL);
-                        URLConnection conn = url.openConnection();
-
-                        conn.setDoOutput(true);
-
-                        OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-                        out.write(title);
-                        out.write("&*&");
-                        out.write(content);
-                        out.write("&*&");
-                        out.write(writer);
-                        out.write("&*&");
-                        out.write(password);
-                        out.write("&*&");
-                        out.write(strCurDate);
-
-                        out.close();
-
-                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    }catch(Exception e) {
-                        Log.d("Exception", e.toString());
-                    }
-                }
-            }).start();
-
-            // 글쓰기 종료 -> ClubActivity (글 목록 페이지)로 넘어감
-            this.finish();
+            /* ClubActivity 로 전송할 내용들 (바로 적용시키기 위하여) */
+            sendDataToClubActivity();
+            /* 서버에 데이터 전송하고 종료 */
+            saveData();
         }else if(v.getId() == R.id.inputWriter) {
+            /* 작성자 (동아리) 선택 메서드 */
             DialogRadio();
         }else if(v.getId() == R.id.keyButton) {
-            if(writer.equals("")){
-                Toast.makeText(getApplicationContext(), "입력하세요...", Toast.LENGTH_LONG).show();
-            }else if(writer.equals("AO")) {
-                if(keyFiled.getText().toString().equals(Constants.CLUB_AO)) {
-                    Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
-                    password = Constants.CLUB_AO;
+            matchingKey();
+        }
+    }
 
-                    writeButton.setEnabled(true);
-                    writeButton.setFocusable(true);
-                }else {
-                    Toast.makeText(getApplicationContext(), "AO에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
-                }
-            }else if(writer.equals("인클루드")) {
-                if(keyFiled.getText().toString().equals(Constants.CLUB_INCLUDE)) {
-                    Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
-                    password = Constants.CLUB_INCLUDE;
+    private void matchingKey() {
+        if(writer.equals("AO")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_AO)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_AO;
 
-                    writeButton.setEnabled(true);
-                    writeButton.setFocusable(true);
-                }else {
-                    Toast.makeText(getApplicationContext(), "인클루드에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
-                }
-            }else if(writer.equals("한울")) {
-                if(keyFiled.getText().toString().equals(Constants.CLUB_HANWOOL)) {
-                    Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
-                    password = Constants.CLUB_HANWOOL;
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "AO에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("인클루드")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_INCLUDE)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_INCLUDE;
 
-                    writeButton.setEnabled(true);
-                    writeButton.setFocusable(true);
-                }else {
-                    Toast.makeText(getApplicationContext(), "한울에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
-                }
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "인클루드에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("한울")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_HANWOOL)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_HANWOOL;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "한울에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("SAT")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_SAT)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_SAT;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "SAT에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("ICUNIX")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_ICUNIX)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_ICUNIX;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "ICUNIX에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("NEXT")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_NEXT)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_NEXT;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "NEXT에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("MAP")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_MAP)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_MAP;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "MAP에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("그리고")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_AND)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_AND;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "AND에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("COSCI")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_COSCI)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_COSCI;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "COSCI에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
+            }
+        }else if(writer.equals("OS")) {
+            if(keyFiled.getText().toString().equals(Constants.CLUB_OS)) {
+                Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                password = Constants.CLUB_OS;
+
+                writeButton.setEnabled(true);
+                writeButton.setFocusable(true);
+            }else {
+                Toast.makeText(getApplicationContext(), "OS에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void sendDataToClubActivity() {
+        intent = getIntent();
+        extra = new Bundle();
+
+        if(inputTitle.getText().toString().length() == 0)
+            title = null;
+        else
+            title = inputTitle.getText().toString();
+
+        extra.putString("writer", writer);
+        extra.putString("timestamp", strCurDate);
+        extra.putString("title", title);
+        intent.putExtras(extra);
+        this.setResult(RESULT_OK, intent);
+
+        if(inputContent.getText().toString().length() == 0)
+            Toast.makeText(getApplicationContext(),  "내용 0으로 입력", Toast.LENGTH_LONG).show();
+        else
+            content = inputContent.getText().toString();
+    }
+
+    private void saveData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(Constants.CLUB_SAVE_URL);
+                    URLConnection conn = url.openConnection();
+
+                    conn.setDoOutput(true);
+
+                    /* 데이터 전송, &*&은 데이터를 구분할 토큰 */
+                    OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                    out.write(title);
+                    out.write("&*&");
+                    out.write(content);
+                    out.write("&*&");
+                    out.write(writer);
+                    out.write("&*&");
+                    out.write(password);
+                    out.write("&*&");
+                    out.write(strCurDate);
+
+                    out.close();
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                }catch(Exception e) {
+                    Log.d("Exception", e.toString());
+                }
+            }
+        }).start();
+
+        this.finish();
     }
 }

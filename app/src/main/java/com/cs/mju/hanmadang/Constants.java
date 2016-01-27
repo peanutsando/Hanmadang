@@ -42,4 +42,12 @@ public class Constants {
     public static final String CLUB_AO = "#ao0000";
     public static final String CLUB_INCLUDE = "#in0000";
     public static final String CLUB_HANWOOL = "#ha0000";
+    public static final String CLUB_SAT = "#sa0000";
+    public static final String CLUB_ICUNIX = "#ic0000";
+    public static final String CLUB_NEXT = "#ne0000";
+    public static final String CLUB_MAP = "#ma0000";
+    public static final String CLUB_AND = "#an0000";
+    public static final String CLUB_COSCI = "#co0000";
+    public static final String CLUB_OS = "#os0000";
+
 }
