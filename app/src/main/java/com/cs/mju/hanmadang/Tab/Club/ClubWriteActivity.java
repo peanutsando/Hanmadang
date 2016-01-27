@@ -52,7 +52,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
     // DB에 저장할 내용들 및 ClubActivity 로 전달하는 title, writer, strCurDate (글목록 표시 위해)
     String title;   // 제목
-    String writer;  // 작성자
+    String writer = "";  // 작성자
     String strCurDate;  // 날짜
     String password;
     String content;
@@ -185,7 +185,9 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         }else if(v.getId() == R.id.inputWriter) {
             DialogRadio();
         }else if(v.getId() == R.id.keyButton) {
-            if(writer.equals("AO")) {
+            if(writer.equals("")){
+                Toast.makeText(getApplicationContext(), "입력하세요...", Toast.LENGTH_LONG).show();
+            }else if(writer.equals("AO")) {
                 if(keyFiled.getText().toString().equals(Constants.CLUB_AO)) {
                     Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
                     password = Constants.CLUB_AO;
