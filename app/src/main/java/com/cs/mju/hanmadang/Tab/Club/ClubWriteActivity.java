@@ -142,7 +142,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
     private void matchingKey() {
         if(writer.equals("")){
-            Toast.makeText(getApplicationContext(), "비밀번호 입력하셈요", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "비밀번호를 입력하십시오.", Toast.LENGTH_LONG).show();
         }else if(writer.equals("AO")) {
             if(keyFiled.getText().toString().equals(Constants.CLUB_AO)) {
                 Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();

@@ -106,6 +106,11 @@ public class ClubActivity extends AppCompatActivity {
 
                     // 아이템 등록
                     createListView(title,timestamp,writer);
+
+                    // 화면 refresh
+                    intent = getIntent();
+                    finish();
+                    startActivity(intent);
                 case READ_ACTIVITY:
                     break;
             }
