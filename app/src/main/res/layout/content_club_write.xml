@@ -117,22 +117,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/writerLayout"
         android:padding="10dp">
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:paddingLeft="4dp"
-            android:text="내용 "
-            android:textColor="#ff222222"
-            android:textSize="18dp"
-            />
 
         <EditText
             android:id="@+id/inputContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/content"
             android:layout_alignBaseline="@id/content"
             android:layout_marginLeft="7dp"
             android:lines="10" android:gravity="top|left" android:inputType="textMultiLine"

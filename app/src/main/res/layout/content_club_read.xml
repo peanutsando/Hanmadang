@@ -85,6 +85,7 @@
         android:layout_marginTop="3dp"
         />
 
+    // 본문
     <RelativeLayout
         android:id="@+id/contentLayout"
         android:layout_width="wrap_content"
@@ -94,7 +95,7 @@
 
         <TextView
             android:id="@+id/content"
-            android:lines="18"
+            android:lines="14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -109,20 +110,71 @@
         android:layout_marginTop="3dp"
         />
 
+     // 키 필드
+    <RelativeLayout
+        android:id="@+id/keyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contentLayout"
+        android:layout_marginTop="15dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingLeft="4dp"
+            android:text="키 입력 "
+            android:textColor="#ff222222"
+            android:textSize="18dp"
+            />
+
+        <EditText
+            android:id="@+id/inputKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/key"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:background="@drawable/round"
+            android:hint=" 키를 입력하세요"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/keyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/inputKey"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBaseline="@id/inputKey"
+            android:text="확인"
+            />
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/write_borderLine3"
+        android:layout_below="@id/keyLayout"
         android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:padding="10dp">
 
         <Button
             android:id="@+id/okButton"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="확인"
+            android:gravity="center_horizontal"
+            />
+
+        <Button
+            android:id="@+id/delButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/okButton"
+            android:layout_marginLeft="60dp"
+            android:text="삭제"
             android:gravity="center_horizontal"
             />
     </RelativeLayout>

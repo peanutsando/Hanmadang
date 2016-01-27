@@ -17,9 +17,10 @@ import com.cs.mju.hanmadang.R;
  */
 public class ClubReadActivity extends AppCompatActivity implements View.OnClickListener  {
     private TextView content;
-    private Button button;
+    private Button okButton;
     private TextView title;
     private TextView writer;
+    private Button delButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +44,22 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         content.setHorizontalScrollBarEnabled(true);
         content.setMovementMethod(new ScrollingMovementMethod());
 
-        button = (Button)findViewById(R.id.okButton);
+        okButton = (Button)findViewById(R.id.okButton);
+        delButton = (Button)findViewById(R.id.delButton);
         title = (TextView)findViewById(R.id.inputTitle);
         writer = (TextView)findViewById(R.id.inputWriter);
     }
 
     private void addListenersToView() {
-        button.setOnClickListener(this);
+        okButton.setOnClickListener(this);
+        delButton.setOnClickListener(this);
     }
 
     public void onClick(View v) {
         if(v.getId() == R.id.okButton) {
             finish();
+        }else if(v.getId() == R.id.delButton) {
+
         }
     }
 
