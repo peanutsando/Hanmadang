@@ -53,7 +53,7 @@ public class ClubActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.writeList);
         adapter = new WriteListAdapter(this);
 
-        adapter.addItem(new WriteItem("임시 제목", "2016-01-27 14:55:03.0", "관리자"));
+        // DB에서 글목록 갖고오기
         loadData();
 
         // 리스트뷰에 어댑터 설정
@@ -70,6 +70,11 @@ public class ClubActivity extends AppCompatActivity {
                  Toast.makeText(getApplicationContext(), "Selected : " + curData[0], Toast.LENGTH_LONG).show();
                  */
                 Intent intent = new Intent(getApplicationContext(), ClubReadActivity.class);
+                Bundle extra = new Bundle();
+                position = (jsonParser.object.size() - position-1);
+                extra.putInt("pos", position);
+                intent.putExtras(extra);
+
                 startActivity(intent);
             }
         });

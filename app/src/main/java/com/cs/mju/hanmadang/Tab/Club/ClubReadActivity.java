@@ -1,5 +1,6 @@
 package com.cs.mju.hanmadang.Tab.Club;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -62,8 +63,11 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         JSONParser jsonParser = new JSONParser();
         jsonParser.parseJSONFromURL(Constants.CLUB_URL);
 
-        title.setText(jsonParser.object.get(0).getB_title());
-        content.setText(jsonParser.object.get(0).getB_content());
-        writer.setText(jsonParser.object.get(0).getB_writer());
+        Intent intent = getIntent();
+        int pos = intent.getExtras().getInt("pos");
+
+        title.setText(jsonParser.object.get(pos).getB_title());
+        content.setText(jsonParser.object.get(pos).getB_content());
+        writer.setText(jsonParser.object.get(pos).getB_writer());
     }
 }
