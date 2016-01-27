@@ -1,3 +1,5 @@
+
+
 package com.cs.mju.hanmadang.Tab.Club;
 
 import android.app.AlertDialog;
@@ -6,15 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Constants;
+import com.cs.mju.hanmadang.R;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,6 +40,8 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
     // 제목 입력 EditText
     EditText inputTitle;
+    // 내용 입력 EditTEXT
+    EditText inputContent;
 
     // 작성자 선택 textView
     TextView selectWriter;
@@ -40,10 +50,12 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
     EditText keyFiled;
     Button keyButton;
 
-    // ClubActivity 로 전달하는 제목, 날짜, 작성자
-    String title;
-    String writer;
-    String strCurDate;
+    // DB에 저장할 내용들 및 ClubActivity 로 전달하는 title, writer, strCurDate (글목록 표시 위해)
+    String title;   // 제목
+    String writer;  // 작성자
+    String strCurDate;  // 날짜
+    String password;
+    String content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +106,9 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         // 제목 입력 EditText
         inputTitle = (EditText)findViewById(R.id.inputTitle);
 
+        // 내용 입력 EditText
+        inputContent = (EditText)findViewById(R.id.inputContent);
+
         // 작성자 선택 textView
         selectWriter = (TextView)findViewById(R.id.inputWriter);
 
@@ -115,6 +130,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             this.setResult(RESULT_CANCELED, intent);
             this.finish();
         }else if(v.getId() == R.id.writeButton) {
+            /** ClubActivity 로 전송할 내용들 (바로 적용시키기 위하여) */
             intent = getIntent();
             extra = new Bundle();
 
@@ -129,6 +145,42 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             intent.putExtras(extra);
             this.setResult(RESULT_OK, intent);
 
+            if(inputContent.getText().toString().length() == 0)
+                Toast.makeText(getApplicationContext(),  "내용 0으로 입력", Toast.LENGTH_LONG).show();
+            else
+                content = inputContent.getText().toString();
+
+            /** 서버에 데이터 전송 */
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = new URL(Constants.CLUB_SAVE_URL);
+                        URLConnection conn = url.openConnection();
+
+                        conn.setDoOutput(true);
+
+                        OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                        out.write(title);
+                        out.write("&*&");
+                        out.write(content);
+                        out.write("&*&");
+                        out.write(writer);
+                        out.write("&*&");
+                        out.write(password);
+                        out.write("&*&");
+                        out.write(strCurDate);
+
+                        out.close();
+
+                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    }catch(Exception e) {
+                        Log.d("Exception", e.toString());
+                    }
+                }
+            }).start();
+
+            // 글쓰기 종료 -> ClubActivity (글 목록 페이지)로 넘어감
             this.finish();
         }else if(v.getId() == R.id.inputWriter) {
             DialogRadio();
@@ -136,6 +188,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             if(writer.equals("AO")) {
                 if(keyFiled.getText().toString().equals(Constants.CLUB_AO)) {
                     Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                    password = Constants.CLUB_AO;
 
                     writeButton.setEnabled(true);
                     writeButton.setFocusable(true);
@@ -145,6 +198,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             }else if(writer.equals("인클루드")) {
                 if(keyFiled.getText().toString().equals(Constants.CLUB_INCLUDE)) {
                     Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                    password = Constants.CLUB_INCLUDE;
 
                     writeButton.setEnabled(true);
                     writeButton.setFocusable(true);
@@ -154,6 +208,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             }else if(writer.equals("한울")) {
                 if(keyFiled.getText().toString().equals(Constants.CLUB_HANWOOL)) {
                     Toast.makeText(getApplicationContext(), "비밀번호 일치", Toast.LENGTH_LONG).show();
+                    password = Constants.CLUB_HANWOOL;
 
                     writeButton.setEnabled(true);
                     writeButton.setFocusable(true);

@@ -28,9 +28,7 @@ public class ClubActivity extends AppCompatActivity {
     ListView listView;
     WriteListAdapter adapter;
 
-    String writer;
-    String timestamp;
-    String title;
+    JSONParser jsonParser = new JSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +48,14 @@ public class ClubActivity extends AppCompatActivity {
             }
         });
 
-        loadData();
 
         // 어댑터 객체 생성
         listView = (ListView) findViewById(R.id.writeList);
         adapter = new WriteListAdapter(this);
 
-        adapter.addItem(new WriteItem(title, timestamp, writer));
+        adapter.addItem(new WriteItem("임시 제목", "2016-01-27 14:55:03.0", "관리자"));
+        loadData();
+
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
@@ -76,14 +75,13 @@ public class ClubActivity extends AppCompatActivity {
         });
     }
 
-    public void createListView() {
+    public void createListView(String title, String timestamp, String writer) {
         // 아이템 등록
         if(title == null)
             Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_LONG).show();
         else {
             adapter.addItem(new WriteItem(title, timestamp, writer));
-            ((WriteListAdapter)listView.getAdapter()).notifyDataSetInvalidated();
-            Toast.makeText(this, "성공", Toast.LENGTH_LONG).show();
+            ((WriteListAdapter) listView.getAdapter()).notifyDataSetInvalidated();
         }
     }
 
@@ -93,12 +91,16 @@ public class ClubActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             switch(requestCode) {
                 case WRITE_ACTIVITY:
+                    String writer;
+                    String timestamp;
+                    String title;
+
                     writer = intent.getExtras().getString("writer");
                     timestamp = intent.getExtras().getString("timestamp");
                     title = intent.getExtras().getString("title");
 
                     // 아이템 등록
-                    createListView();
+                    createListView(title,timestamp,writer);
                 case READ_ACTIVITY:
                     break;
             }
@@ -108,12 +110,19 @@ public class ClubActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        JSONParser jsonParser = new JSONParser();
         jsonParser.parseJSONFromURL(Constants.CLUB_URL);
 
-        title = jsonParser.object.get(0).getB_title();
-        writer = jsonParser.object.get(0).getB_writer();
-        timestamp = jsonParser.object.get(0).getB_timestamp();
+        String title;
+        String writer;
+        String timestamp;
+
+        for(int i=0; i<jsonParser.object.size(); i++) {
+            title = jsonParser.object.get(i).getB_title();
+            writer = jsonParser.object.get(i).getB_writer();
+            timestamp = jsonParser.object.get(i).getB_timestamp();
+
+            adapter.addItem(new WriteItem(title, timestamp, writer));
+        }
     }
 
     @Override
@@ -121,3 +130,5 @@ public class ClubActivity extends AppCompatActivity {
         keyHandler.onBackPressed();
     }
 }
+
+
