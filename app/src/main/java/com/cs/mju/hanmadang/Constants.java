@@ -8,6 +8,7 @@ public class Constants {
     public static final String NOTICE_URL = "http://jw4.mju.ac.kr/user/boardList.action?boardId=28510945&page=1";
     public static final String CLUB_URL = "http://117.17.158.234:8080/Hanmadang/ClubController";
     public static final String CLUB_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ClubSaveController";
+    public static final String CLUB_DEL_URL = "http://117.17.158.234:8080/Hanmadang/ClubDeleteController";
 
     /* XML PARSING TAG AND PARAMS */
     public static final String TITLE_ELEMENT = "td[class=title]";

@@ -283,7 +283,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         this.setResult(RESULT_OK, intent);
 
         if(inputContent.getText().toString().length() == 0)
-            Toast.makeText(getApplicationContext(),  "내용 0으로 입력", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),  "내용 없음", Toast.LENGTH_LONG).show();
         else
             content = inputContent.getText().toString();
     }

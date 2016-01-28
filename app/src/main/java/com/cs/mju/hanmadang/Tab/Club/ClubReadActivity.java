@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,12 @@ import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by park on 2016-01-18.
@@ -26,6 +33,7 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
     private Button delButton;
     private EditText inputKey;
     private Button keyButton;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,9 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
             finish();
         }else if(v.getId() == R.id.keyButton) {
             matchingKey();
+        }else if(v.getId() == R.id.delButton) {
+            deleteData();
+            sendDataToClubActivity();
         }
     }
 
@@ -195,11 +206,45 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         jsonParser.parseJSONFromURL(Constants.CLUB_URL);
 
         Intent intent = getIntent();
-        int pos = intent.getExtras().getInt("pos");
+        pos = intent.getExtras().getInt("pos");
 
         title.setText(jsonParser.object.get(pos).getB_title());
         content.setText(jsonParser.object.get(pos).getB_content());
         writer.setText(jsonParser.object.get(pos).getB_writer());
         password = jsonParser.object.get(pos).getB_password(); // 입력된 key와 비교
+    }
+
+    private void deleteData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(Constants.CLUB_DEL_URL);
+                    URLConnection conn = url.openConnection();
+
+                    conn.setDoOutput(true);
+
+                    /* 삭제 시에 필요한 정보인 글 number 를 보낸다. */
+                    OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                    pos = pos+1;
+                    String num = String.valueOf(pos);
+                    Log.d("test", num);
+
+                    out.write(num);
+                    out.close();
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                }catch(Exception e) {
+                    Log.d("Exception", e.toString());
+                }
+            }
+        }).start();
+    }
+
+    private void sendDataToClubActivity() {
+        Intent intent = getIntent();
+        this.setResult(RESULT_OK, intent);
+
+        this.finish();
     }
 }

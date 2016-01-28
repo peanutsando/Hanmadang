@@ -75,7 +75,7 @@ public class ClubActivity extends AppCompatActivity {
                 extra.putInt("pos", position);
                 intent.putExtras(extra);
 
-                startActivity(intent);
+                startActivityForResult(intent, READ_ACTIVITY);
             }
         });
     }
@@ -112,6 +112,10 @@ public class ClubActivity extends AppCompatActivity {
                     finish();
                     startActivity(intent);
                 case READ_ACTIVITY:
+                    intent = getIntent();
+                    finish();
+                    startActivity(intent);
+
                     break;
             }
         }else {
