@@ -122,7 +122,7 @@ public class ClubActivity extends AppCompatActivity {
                     */
                     break;
                 case READ_ACTIVITY:
-                   // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
+                    // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     Bundle r_extra = new Bundle();
                     String r_act = "club";
@@ -134,7 +134,7 @@ public class ClubActivity extends AppCompatActivity {
                     break;
             }
         }else {
-          //  Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
         }
     }
 
