@@ -16,7 +16,7 @@ import java.util.List;
  * Created by park on 2016-01-26.
  */
 public class JSONParser {
-    public List<User> object;
+    public List<ClubInformation> object;
 
     public JSONParser() {
     }
@@ -29,7 +29,7 @@ public class JSONParser {
             try {
                 JsonReader reader = new JsonReader(new InputStreamReader(new URL(url).openStream()));
                 Gson gson = new Gson();
-                Type listType = new TypeToken<ArrayList<User>>() {
+                Type listType = new TypeToken<ArrayList<ClubInformation>>() {
                 }.getType();
                 object = gson.fromJson(reader, listType);
             } catch (Exception e) {

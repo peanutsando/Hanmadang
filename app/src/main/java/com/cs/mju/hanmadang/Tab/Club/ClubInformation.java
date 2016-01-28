@@ -1,11 +1,9 @@
 package com.cs.mju.hanmadang.Tab.Club;
 
 /**
- * Created by park on 2016-01-26.
+ * Created by Y5725 on 2016-01-28.
  */
-
-public class User
-{
+public class ClubInformation {
     private String b_password;
 
     private String b_title;
