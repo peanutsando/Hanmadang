@@ -142,6 +142,9 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             //   sendPushMessage();
             sendDataToClubActivity();
             /* 서버에 데이터 전송하고 종료 */
+            PushJsonParser jsonParser = new PushJsonParser();
+            jsonParser.sendPushMessage(title);
+            this.finish();
         } else if (v.getId() == R.id.inputWriter) {
             //* 작성자 (동아리) 선택 메서드 *//*
             DialogRadio();
@@ -296,7 +299,6 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(getApplicationContext(), "내용 없음", Toast.LENGTH_LONG).show();
         else
             content = inputContent.getText().toString();
-        finish();
     }
 
     private void saveData() {
@@ -321,9 +323,11 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
                     out.write("&*&");
                     out.write(strCurDate);
 
+                    Log.e("sadfsfd", title + " " + content + " " + writer);
                     out.close();
 
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    in.close();
                 } catch (Exception e) {
                     Log.d("Exception", e.toString());
                 }
@@ -331,29 +335,4 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         }).start();
     }
 
-    private void sendPushMessage() {
-        List<String> keyList = new ArrayList<String>();
-        Sender sender = new Sender(Constants.GOOGLE_API_KEY);
-        Message message = new Message.Builder().addData("message", inputTitle.getText().toString()).build();
-        PushJsonParser pushJsonParser = new PushJsonParser();
-        pushJsonParser.getTokenKeyFromURL(Constants.REG_URL);
-        MulticastResult result;
-        Log.e("TO", pushJsonParser.object.toString());
-        int size = pushJsonParser.object.size();
-        for (int i = 0; i < size; i++) {
-            keyList.add(i, pushJsonParser.object.get(i).getReg_key());
-            Log.e("ee", keyList.get(i));
-        }
-        try {
-            result = sender.send(message, keyList, 1);
-            if (result != null) {
-                List<Result> results = result.getResults();
-                for (Result result0 : results) {
-                    Log.e("###", result0.getMessageId());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
