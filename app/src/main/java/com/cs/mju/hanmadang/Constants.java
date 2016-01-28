@@ -9,6 +9,8 @@ public class Constants {
     public static final String CLUB_URL = "http://117.17.158.234:8080/Hanmadang/ClubController";
     public static final String CLUB_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ClubSaveController";
     public static final String CLUB_DEL_URL = "http://117.17.158.234:8080/Hanmadang/ClubDeleteController";
+    public static final String SCHEDULE_URL = "http://117.17.158.234:8080/Hanmadang/ScheduleController";
+    public static final String SCHEDULE_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ScheduleSaveController";
 
     /* XML PARSING TAG AND PARAMS */
     public static final String TITLE_ELEMENT = "td[class=title]";

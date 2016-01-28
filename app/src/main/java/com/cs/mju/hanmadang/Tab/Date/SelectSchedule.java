@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
+import com.cs.mju.hanmadang.Tab.Club.JSONParser;
+import com.cs.mju.hanmadang.Tab.Club.WriteItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,6 +32,7 @@ public class SelectSchedule extends ActionBarActivity {
     ScheduleListAdapter adapter;
     TextView textView1;
     int selectedYear, selectedMonth, selectedDay;
+    ScheduleJSONParser jsonParser = new ScheduleJSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +43,15 @@ public class SelectSchedule extends ActionBarActivity {
         listView1 = (ListView) findViewById(R.id.listView1);
         // 텍스트뷰 객체 참조
         textView1 = (TextView)findViewById(R.id.textView1);
+
+        //날짜 세팅
         setDate();
 
         // 어댑터 객체 생성
         adapter = new ScheduleListAdapter(this);
 
-        // 아이템 데이터 만들기
-        Resources res = getResources();
-        adapter.addItem(new ScheduleItem("최종 제출", "최종 제출!!", "컴공과사"));
-        adapter.addItem(new ScheduleItem("레이아웃 짜기", "레이아웃 마감", "Git"));
-        adapter.addItem(new ScheduleItem("2주 남았당", "유후", "하아"));
+        // DB에서 글목록 갖고오기
+        loadData();
 
         // 리스트뷰에 어댑터 설정
         listView1.setAdapter(adapter);
@@ -76,21 +80,43 @@ public class SelectSchedule extends ActionBarActivity {
         Button writeButton = (Button) findViewById(R.id.writeButton);
         writeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                Calendar calendar = Calendar.getInstance();
-//                selectedYear = calendar.get(calendar.YEAR);
-//                selectedMonth = calendar.get(calendar.MONTH);
-//                selectedDay = calendar.get(calendar.DATE);
-
                 Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
-//                intent.putExtra("selectedYear", selectedYear);
-//                intent.putExtra("selectedMonth", selectedMonth);
-//                intent.putExtra("selectedDay", selectedDay);
+
                 intent.putExtra("selectedYear", getIntent().getIntExtra("selectedYear",0));
                 intent.putExtra("selectedMonth", getIntent().getIntExtra("selectedMonth",0));
                 intent.putExtra("selectedDay", getIntent().getIntExtra("selectedDay",0));
                 startActivityForResult(intent, REQUEST_CODE_SELECTADD);
             }
         });
+    }
+
+    private void loadData() {
+        jsonParser.parseJSONFromURL(Constants.SCHEDULE_URL);
+
+        String title;
+        String place;
+        String content;
+        String date;
+        // 10월 전이면 월 앞에 0을 붙이는 작업
+        if(getIntent().getIntExtra("selectedMonth", 0)+1<10){
+            date = getIntent().getIntExtra("selectedYear", 0) + "-" + "0"+(getIntent().getIntExtra("selectedMonth", 0)+1) + "-" + getIntent().getIntExtra("selectedDay", 0);
+        }else{
+            date = getIntent().getIntExtra("selectedYear", 0) + "-" + (getIntent().getIntExtra("selectedMonth", 0)+1) + "-" + getIntent().getIntExtra("selectedDay", 0);
+        }
+        Log.e("date ", date);
+
+        for(int i=0; i<jsonParser.object.size(); i++) {
+            String[] str = jsonParser.object.get(i).getTimestamp().split(" ");
+            Log.e("str[0] ", str[0]);
+            if(str[0].equals(date)){
+                Log.e("일치, addItem ", date + "=" + str[0]);
+                title = jsonParser.object.get(i).getTitle();
+                place = jsonParser.object.get(i).getPlace();
+                content = jsonParser.object.get(i).getContent();
+
+                adapter.addItem(new ScheduleItem(title, place, content));
+            }
+        }
     }
 
     private void setDate(){

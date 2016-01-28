@@ -168,7 +168,7 @@
             android:layout_toRightOf="@id/key"
             android:layout_marginLeft="10dp"
             android:ems="10"
-            android:background="@drawable/round"
+            
             android:hint=" 키를 입력하세요"
             android:inputType="textMultiLine" />
 

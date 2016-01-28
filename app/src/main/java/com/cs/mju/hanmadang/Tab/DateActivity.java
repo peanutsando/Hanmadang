@@ -28,22 +28,14 @@ import java.util.Calendar;
 public class DateActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_ADD = 1001;
     private BackKeyHandler keyHandler;
-
     //월별 캘린더 뷰 객체
     CalendarMonthView monthView;
-
     //월별 캘린더 어댑터
     CalendarMonthAdapter monthViewAdapter;
-
     // 월을 표시하는 텍스트뷰
     TextView monthText;
-
-    // 현재 연도
-    int curYear;
-
-    // 현재 월
-    int curMonth;
-
+    // 현재 연도, 월
+    int curYear, curMonth;
     // 달력에서 선택한 년, 월, 일, 시간, 분
     int selectedYear, selectedMonth, selectedDay, currentHour, currentMinute;
 
@@ -134,7 +126,7 @@ public class DateActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         selectedYear = calendar.get(calendar.YEAR);
         selectedMonth = calendar.get(calendar.MONTH);
-        selectedDay = calendar.get(calendar.DATE)+1;
+        selectedDay = calendar.get(calendar.DATE);
     }
 
     // 월 표시 텍스트 설정
@@ -150,7 +142,6 @@ public class DateActivity extends AppCompatActivity {
         if(resultCode == 1){
 //            Toast.makeText(this, "응답으로 전달된 년도" + year, Toast.LENGTH_LONG).show();
             Toast.makeText(this, "데이터베이스에 저장.", Toast.LENGTH_LONG).show();
-            initDate();
         }else if(resultCode == 2){
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
             initDate();

@@ -30,7 +30,7 @@
 
 		<!--왼쪽에 이미지 넣기-->
 		<EditText
-			android:id="@+id/editSchedule"
+			android:id="@+id/editTitle"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/timePicker"
@@ -43,13 +43,13 @@
 			android:id="@+id/editPlace"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_below="@+id/editSchedule"
+			android:layout_below="@+id/editTitle"
 			android:hint="장소"
 			android:cursorVisible="true"
 			android:layout_toEndOf="@+id/schedule" />
 
 		<EditText
-			android:id="@+id/editExplain"
+			android:id="@+id/editContent"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@+id/editPlace"
@@ -62,7 +62,7 @@
 			android:id="@+id/datePicker"
 			android:layout_marginTop="10dp"
 			android:calendarViewShown="false"
-			android:layout_below="@id/editExplain"
+			android:layout_below="@id/editContent"
 			android:layout_width="wrap_content"
 			android:layout_height="0dp" />
 
@@ -70,7 +70,7 @@
 			android:id="@+id/addButton"
 			android:layout_width="100dp"
 			android:layout_height="wrap_content"
-			android:layout_below="@id/editExplain"
+			android:layout_below="@id/editContent"
 			android:layout_marginLeft="60dp"
 			android:layout_marginTop="16dp"
 			android:drawableLeft="@drawable/ok_btn"
@@ -81,7 +81,7 @@
 			android:id="@+id/cancelButton"
 			android:layout_width="100dp"
 			android:layout_height="wrap_content"
-			android:layout_below="@id/editExplain"
+			android:layout_below="@id/editContent"
 			android:layout_toRightOf="@id/addButton"
 			android:layout_marginLeft="60dp"
 			android:layout_marginTop="16dp"

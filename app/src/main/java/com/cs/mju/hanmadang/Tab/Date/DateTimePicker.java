@@ -16,7 +16,6 @@ import com.cs.mju.hanmadang.R;
 import java.util.Calendar;
 
 public class DateTimePicker extends LinearLayout {
-
 	// 날짜나 시간이 바뀔 때 호출되는 리스너 새로 정의
 
 	public interface OnDateTimeChangedListener {
@@ -28,9 +27,6 @@ public class DateTimePicker extends LinearLayout {
 
 	// 날짜선택 위젯
 	private final DatePicker datePicker;
-
-	// 체크박스
-//	private final CheckBox enableTimeCheckBox;
 
 	// 시간선택 위젯
 	private final TimePicker timePicker;
@@ -69,15 +65,6 @@ public class DateTimePicker extends LinearLayout {
 				}
 			}
 		});
-
-		// 체크박스 이벤트 처리
-//		enableTimeCheckBox = (CheckBox)findViewById(R.id.enableTimeCheckBox);
-//		enableTimeCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//				timePicker.setEnabled(isChecked);
-//				timePicker.setVisibility((enableTimeCheckBox).isChecked()? View.VISIBLE: View.INVISIBLE);
-//			}
-//		});
 
 		// 시간선택 위젯 이벤트 처리
 		timePicker = (TimePicker)findViewById(R.id.timePicker);
@@ -134,8 +121,4 @@ public class DateTimePicker extends LinearLayout {
 	public int getCurrentMinute() {
 		return timePicker.getCurrentMinute();
 	}
-
-//	public boolean enableTime() {
-//		return enableTimeCheckBox.isChecked();
-//	}
 }
