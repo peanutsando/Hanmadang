@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.PushJsonParser;
 import com.cs.mju.hanmadang.Function.keyHandler;
+import com.cs.mju.hanmadang.Function.push.RegistrationIntentService;
 import com.cs.mju.hanmadang.R;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
@@ -335,16 +336,25 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
 
     private void sendPushMessage() {
         List<String> keyList = new ArrayList<String>();
+        String key;
         Sender sender = new Sender(Constants.GOOGLE_API_KEY);
         Message message = new Message.Builder().addData("message", inputTitle.getText().toString()).build();
         PushJsonParser pushJsonParser = new PushJsonParser();
         pushJsonParser.getTokenKeyFromURL(Constants.REG_URL);
+
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
+        RegistrationIntentService registrationIntentService = new RegistrationIntentService();
+        key = registrationIntentService.myTokenReturns();
+
         MulticastResult result;
         Log.e("TO", pushJsonParser.object.toString());
         int size = pushJsonParser.object.size();
+        Log.e("KEY", key);
         for (int i = 0; i < size; i++) {
-            keyList.add(i, pushJsonParser.object.get(i).getReg_key());
-            Log.e("ee", keyList.get(i));
+            if(!key.equals(pushJsonParser.object.get(i).getReg_key())) {
+                keyList.add(i, pushJsonParser.object.get(i).getReg_key());
+            }
         }
         try {
                 result = sender.send(message, keyList, 1);

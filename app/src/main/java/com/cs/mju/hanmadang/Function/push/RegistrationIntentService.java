@@ -46,7 +46,7 @@ public class RegistrationIntentService extends IntentService {
 
             sendServerToRegitToken();
             sendRegistrationToServer(token);
-
+            myTokenReturns();
             subscribeTopics(token);
 
             sharedPreferences.edit().putBoolean(Constants.SENT_TOKEN_TO_SERVER, true).apply();
@@ -83,6 +83,10 @@ public class RegistrationIntentService extends IntentService {
     private void sendRegistrationToServer(String token) {
         // Add custom implementation, as needed.
 
+    }
+
+    public String myTokenReturns(){
+        return this.token ;
     }
 
     private void subscribeTopics(String token) throws IOException {
