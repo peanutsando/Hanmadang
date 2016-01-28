@@ -25,15 +25,17 @@ import java.net.URLConnection;
  * Created by park on 2016-01-18.
  */
 public class ClubReadActivity extends AppCompatActivity implements View.OnClickListener  {
-    private TextView content;
+    private EditText content;
     private Button okButton;
     private TextView title;
     private TextView writer;
     private String password;
     private Button delButton;
+    private Button modifyButton;
     private EditText inputKey;
     private Button keyButton;
     int pos;
+    String contextString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +53,36 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
-        content = (TextView)findViewById(R.id.content);
+        content = (EditText)findViewById(R.id.content);
         content.setMaxLines(12);
         content.setVerticalScrollBarEnabled(true);
         content.setHorizontalScrollBarEnabled(true);
         content.setMovementMethod(new ScrollingMovementMethod());
+        content.setFocusableInTouchMode(false);
 
         okButton = (Button)findViewById(R.id.okButton);
         delButton = (Button)findViewById(R.id.delButton);
         delButton.setEnabled(false);
         delButton.setFocusable(false);
+
+        modifyButton = (Button)findViewById(R.id.modifyButton);
+        modifyButton.setEnabled(false);
+        modifyButton.setFocusable(false);
+
         title = (TextView)findViewById(R.id.inputTitle);
         writer = (TextView)findViewById(R.id.inputWriter);
 
         inputKey = (EditText)findViewById(R.id.inputKey);
         keyButton = (Button)findViewById(R.id.keyButton);
+
+        contextString = null;
     }
 
     private void addListenersToView() {
         okButton.setOnClickListener(this);
         delButton.setOnClickListener(this);
         keyButton.setOnClickListener(this);
+        modifyButton.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -81,6 +92,9 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
             matchingKey();
         }else if(v.getId() == R.id.delButton) {
             deleteData();
+            sendDataToClubActivity();
+        }else if(v.getId() == R.id.modifyButton) {
+            modifyData();
             sendDataToClubActivity();
         }
     }
@@ -93,6 +107,9 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
                 } else {
                     Toast.makeText(getApplicationContext(), "AO에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -104,6 +121,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "인클루드에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -115,6 +136,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "한울에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -126,6 +151,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "SAT에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -137,6 +166,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "ICUNIX에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -148,6 +181,9 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
                 } else {
                     Toast.makeText(getApplicationContext(), "NEXT에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -159,6 +195,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "MAP에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -170,6 +210,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "그리고에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -181,6 +225,10 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "COSCI에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
@@ -192,10 +240,13 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
 
                     delButton.setEnabled(true);
                     delButton.setFocusable(true);
+                    modifyButton.setEnabled(true);
+                    modifyButton.setFocusable(true);
+                    content.setFocusableInTouchMode(true);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "OS에 맞는 비밀번호가 아닙니다!", Toast.LENGTH_LONG).show();
                 }
-
                 break;
         }
     }
@@ -212,6 +263,31 @@ public class ClubReadActivity extends AppCompatActivity implements View.OnClickL
         content.setText(jsonParser.object.get(pos).getB_content());
         writer.setText(jsonParser.object.get(pos).getB_writer());
         password = jsonParser.object.get(pos).getB_password(); // 입력된 key와 비교
+    }
+
+    private void modifyData() {
+                try {
+                    URL url = new URL(Constants.CLUB_MOD_URL);
+                    URLConnection conn = url.openConnection();
+
+                    conn.setDoOutput(true);
+
+                    /* 삭제 시에 필요한 정보인 글 number 를 보낸다. */
+                    OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                    contextString = content.getText().toString();
+
+                    pos = pos+1;
+                    String num = String.valueOf(pos);
+
+                    out.write(contextString);
+                    out.write("&*&");
+                    out.write(num);
+                    out.close();
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                }catch(Exception e) {
+                    Log.d("Exception", e.toString());
+                }
     }
 
     private void deleteData() {

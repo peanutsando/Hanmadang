@@ -1,10 +1,11 @@
+
+
 package com.cs.mju.hanmadang.Tab.Club;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,8 +17,6 @@ import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.PushJsonParser;
-import com.cs.mju.hanmadang.Function.keyHandler;
-import com.cs.mju.hanmadang.Function.push.RegistrationIntentService;
 import com.cs.mju.hanmadang.R;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
@@ -33,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 public class ClubWriteActivity extends AppCompatActivity implements View.OnClickListener {
     private Button writeButton;
@@ -141,6 +139,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         } else if (v.getId() == R.id.writeButton) {
             /* ClubActivity 로 전송할 내용들 (바로 적용시키기 위하여) */
             saveData(); // 알림푸쉬
+            //   sendPushMessage();
             sendDataToClubActivity();
             /* 서버에 데이터 전송하고 종료 */
         } else if (v.getId() == R.id.inputWriter) {
@@ -297,6 +296,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(getApplicationContext(), "내용 없음", Toast.LENGTH_LONG).show();
         else
             content = inputContent.getText().toString();
+        finish();
     }
 
     private void saveData() {
@@ -329,40 +329,28 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         }).start();
-
-        sendPushMessage();
-        this.finish();
     }
 
     private void sendPushMessage() {
         List<String> keyList = new ArrayList<String>();
-        String key;
         Sender sender = new Sender(Constants.GOOGLE_API_KEY);
         Message message = new Message.Builder().addData("message", inputTitle.getText().toString()).build();
         PushJsonParser pushJsonParser = new PushJsonParser();
         pushJsonParser.getTokenKeyFromURL(Constants.REG_URL);
-
-        Intent intent = new Intent(this, RegistrationIntentService.class);
-        startService(intent);
-        RegistrationIntentService registrationIntentService = new RegistrationIntentService();
-        key = registrationIntentService.myTokenReturns();
-
         MulticastResult result;
         Log.e("TO", pushJsonParser.object.toString());
         int size = pushJsonParser.object.size();
-        Log.e("KEY", key);
         for (int i = 0; i < size; i++) {
-            if(!key.equals(pushJsonParser.object.get(i).getReg_key())) {
-                keyList.add(i, pushJsonParser.object.get(i).getReg_key());
-            }
+            keyList.add(i, pushJsonParser.object.get(i).getReg_key());
+            Log.e("ee", keyList.get(i));
         }
         try {
-                result = sender.send(message, keyList, 1);
-                if (result != null) {
-                    List<Result> results = result.getResults();
-                    for (Result result0 : results) {
-                        Log.e("###", result0.getMessageId());
-                    }
+            result = sender.send(message, keyList, 1);
+            if (result != null) {
+                List<Result> results = result.getResults();
+                for (Result result0 : results) {
+                    Log.e("###", result0.getMessageId());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

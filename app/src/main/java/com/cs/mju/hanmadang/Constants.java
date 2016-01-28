@@ -9,6 +9,7 @@ public class Constants {
     public static final String CLUB_URL = "http://117.17.158.234:8080/Hanmadang/ClubController";
     public static final String CLUB_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ClubSaveController";
     public static final String CLUB_DEL_URL = "http://117.17.158.234:8080/Hanmadang/ClubDeleteController";
+    public static final String CLUB_MOD_URL = "http://117.17.158.234:8080/Hanmadang/ClubModifyController";
     public static final String REG_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/RegisterKeySaveController";
     public static final String REG_URL = "http://117.17.158.234:8080/Hanmadang/RegisterKeyController";
     public static final String SCHEDULE_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ScheduleSaveController";
@@ -62,5 +63,5 @@ public class Constants {
     public static final String CLUB_OS = "#os0000";
 
     public static int num = 0;
-
+    public static int write = 0;
 }

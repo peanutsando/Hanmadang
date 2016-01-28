@@ -27,8 +27,7 @@ public class MainActivity extends TabActivity {
 
         if(Constants.num == 0) {
             createTabHost(0);
-        }
-        else{
+        }else{
             createTabHost(1);
         }
     }
@@ -53,7 +52,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tabHost.newTabSpec("Club").setIndicator(getString(R.string.club)).setContent(new Intent(this, ClubActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("Date").setIndicator(getString(R.string.date)).setContent(new Intent(this, DateActivity.class)));
 
-        getRegTokenKey();
+     //   getRegTokenKey();
         tabHost.setCurrentTab(pos);
     }
 

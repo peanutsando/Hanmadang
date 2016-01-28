@@ -49,17 +49,21 @@ public class ClubActivity extends AppCompatActivity {
             }
         });
 
-
         // 어댑터 객체 생성
         listView = (ListView) findViewById(R.id.writeList);
         adapter = new WriteListAdapter(this);
 
-        // DB에서 글목록 갖고오기
-        loadData();
-
         listView.setSelection(0);
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
+
+        // DB에서 글목록 갖고오기
+        if(Constants.num > 0) {
+            loadData();
+        }else {
+            loadData();
+        }
+
         // 새로 정의한 리스너로 객체를 만들어 설정
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,7 +91,7 @@ public class ClubActivity extends AppCompatActivity {
             Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_LONG).show();
         else {
             adapter.addItem(new WriteItem(title, timestamp, writer));
-            ((WriteListAdapter) listView.getAdapter()).notifyDataSetInvalidated();
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -105,19 +109,14 @@ public class ClubActivity extends AppCompatActivity {
                     timestamp = intent.getExtras().getString("timestamp");
                     title = intent.getExtras().getString("title");
 
-                    // 아이템 등록
                     createListView(title, timestamp, writer);
-
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     Constants.num++;
                     startActivity(intent);
-                    /*
-                        adapter.getListItems().clear();
-                        loadData();
-                    */
+
                     break;
                 case READ_ACTIVITY:
-                    // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
+                  // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     Constants.num++;
                     startActivity(intent);
@@ -142,6 +141,7 @@ public class ClubActivity extends AppCompatActivity {
             timestamp = jsonParser.object.get(i).getB_timestamp();
 
             adapter.addItem(new WriteItem(title, timestamp, writer));
+            ((WriteListAdapter) listView.getAdapter()).notifyDataSetChanged();
         }
     }
 
