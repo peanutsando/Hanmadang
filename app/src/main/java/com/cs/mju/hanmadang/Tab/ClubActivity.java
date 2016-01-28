@@ -13,9 +13,10 @@ import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.BackKeyHandler;
+import com.cs.mju.hanmadang.MainActivity;
+import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Tab.Club.ClubReadActivity;
 import com.cs.mju.hanmadang.Tab.Club.ClubWriteActivity;
-import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Tab.Club.JSONParser;
 import com.cs.mju.hanmadang.Tab.Club.WriteItem;
 import com.cs.mju.hanmadang.Tab.Club.WriteListAdapter;
@@ -63,7 +64,7 @@ public class ClubActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /**
+                /*
                  WriteItem curItem = (WriteItem) adapter.getItem(position);
                  String[] curData = curItem.getData();
 
@@ -78,6 +79,7 @@ public class ClubActivity extends AppCompatActivity {
                 startActivityForResult(intent, READ_ACTIVITY);
             }
         });
+
     }
 
     public void createListView(String title, String timestamp, String writer) {
@@ -105,21 +107,34 @@ public class ClubActivity extends AppCompatActivity {
                     title = intent.getExtras().getString("title");
 
                     // 아이템 등록
-                    createListView(title,timestamp,writer);
+                    createListView(title, timestamp, writer);
 
-                    // 화면 refresh
-                    intent = getIntent();
-                    finish();
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Bundle extra = new Bundle();
+                    String act = "club";
+                    extra.putString("who", act);
+                    intent.putExtras(extra);
+
                     startActivity(intent);
+                    /*
+                        adapter.getListItems().clear();
+                        loadData();
+                    */
+                    break;
                 case READ_ACTIVITY:
-                    intent = getIntent();
-                    finish();
+                   // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Bundle r_extra = new Bundle();
+                    String r_act = "club";
+                    r_extra.putString("who", r_act);
+                    intent.putExtras(r_extra);
+
                     startActivity(intent);
 
                     break;
             }
         }else {
-            Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
+          //  Toast.makeText(this, "실패", Toast.LENGTH_LONG).show();
         }
     }
 

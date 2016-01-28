@@ -26,6 +26,11 @@ public class Splash extends Activity {
                 // 3초간 화면 보여주고 끝
                 // 화면 끝나고 메인 실행
                 Intent i = new Intent(Splash.this, MainActivity.class);
+                Bundle extra = new Bundle();
+                String act = "splash";
+                extra.putString("who", act);
+                i.putExtras(extra);
+
                 startActivity(i);
 
                 // close this activity

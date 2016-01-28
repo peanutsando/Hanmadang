@@ -25,6 +25,9 @@ public class WriteListAdapter extends BaseAdapter {
     public void setListItems(List<WriteItem> listItem) {
         mItems = listItem;
     }
+    public List getListItems() {
+        return mItems;
+    }
 
     public int getCount() {
         return mItems.size();
