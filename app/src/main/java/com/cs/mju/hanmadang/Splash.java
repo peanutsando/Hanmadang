@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.cs.mju.hanmadang.Function.push.RegistrationIntentService;
+
 /**
  * Created by park on 2016-01-28.
  */
@@ -28,10 +30,10 @@ public class Splash extends Activity {
                 Intent i = new Intent(Splash.this, MainActivity.class);
 
                 startActivity(i);
-
                 // close this activity
                 finish();
             }
         }, SPLASH_TIME_OUT);
     }
+
 }

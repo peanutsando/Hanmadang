@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,7 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
+import com.cs.mju.hanmadang.Function.PushJsonParser;
+import com.cs.mju.hanmadang.Function.keyHandler;
 import com.cs.mju.hanmadang.R;
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.MulticastResult;
+import com.google.android.gcm.server.Result;
+import com.google.android.gcm.server.Sender;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,7 +29,9 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ClubWriteActivity extends AppCompatActivity implements View.OnClickListener {
     private Button writeButton;
@@ -129,11 +138,11 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             this.finish();
         }else if(v.getId() == R.id.writeButton) {
             /* ClubActivity 로 전송할 내용들 (바로 적용시키기 위하여) */
+            saveData(); // 알림푸쉬
             sendDataToClubActivity();
             /* 서버에 데이터 전송하고 종료 */
-            saveData();
-        }else if(v.getId() == R.id.inputWriter) {
-            /* 작성자 (동아리) 선택 메서드 */
+       }else if(v.getId() == R.id.inputWriter) {
+       //* 작성자 (동아리) 선택 메서드 *//*
             DialogRadio();
         }else if(v.getId() == R.id.keyButton) {
             matchingKey();
@@ -319,6 +328,30 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             }
         }).start();
 
+        sendPushMessage();
         this.finish();
+    }
+
+    private void sendPushMessage(){
+        List<String> keyList = new ArrayList<String>();
+        Sender sender = new Sender(Constants.GOOGLE_API_KEY);
+        Message message = new Message.Builder().addData("message", inputTitle.getText().toString()).build();
+        PushJsonParser pushJsonParser = new PushJsonParser();
+        pushJsonParser.getTokenKeyFromURL(Constants.REG_URL);
+        MulticastResult result;
+        for(int i=0; i<pushJsonParser.object.size(); i++){
+            keyList.add(i, pushJsonParser.object.get(i).getReg_key());
+        }
+        try{
+            result = sender.send(message, keyList, 5);
+            if(result != null){
+                List<Result> results = result.getResults();
+                for(Result result0 : results){
+                    Log.e("###", result0.getMessageId());
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

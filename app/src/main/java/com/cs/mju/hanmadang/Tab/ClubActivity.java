@@ -119,6 +119,7 @@ public class ClubActivity extends AppCompatActivity {
                 case READ_ACTIVITY:
                     // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
                     intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Constants.num++;
                     startActivity(intent);
 
                     break;

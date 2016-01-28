@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
+import com.cs.mju.hanmadang.Function.push.RegistrationIntentService;
 import com.cs.mju.hanmadang.Function.settings.SettingsActivity;
 import com.cs.mju.hanmadang.Tab.ClubActivity;
 import com.cs.mju.hanmadang.Tab.DateActivity;
@@ -24,10 +25,17 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Constants.num == 0)
+        if(Constants.num == 0) {
             createTabHost(0);
-        else
+        }
+        else{
             createTabHost(1);
+        }
+    }
+
+    private void getRegTokenKey() {
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 
     public void setFlag(int flag) {
@@ -45,6 +53,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tabHost.newTabSpec("Club").setIndicator(getString(R.string.club)).setContent(new Intent(this, ClubActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("Date").setIndicator(getString(R.string.date)).setContent(new Intent(this, DateActivity.class)));
 
+        getRegTokenKey();
         tabHost.setCurrentTab(pos);
     }
 

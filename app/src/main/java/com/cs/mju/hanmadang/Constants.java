@@ -9,8 +9,10 @@ public class Constants {
     public static final String CLUB_URL = "http://117.17.158.234:8080/Hanmadang/ClubController";
     public static final String CLUB_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ClubSaveController";
     public static final String CLUB_DEL_URL = "http://117.17.158.234:8080/Hanmadang/ClubDeleteController";
-    public static final String SCHEDULE_URL = "http://117.17.158.234:8080/Hanmadang/ScheduleController";
+    public static final String REG_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/RegisterKeySaveController";
+    public static final String REG_URL = "http://117.17.158.234:8080/Hanmadang/RegisterKeyController";
     public static final String SCHEDULE_SAVE_URL = "http://117.17.158.234:8080/Hanmadang/ScheduleSaveController";
+    public static final String SCHEDULE_URL = "http://117.17.158.234:8080/Hanmadang/ScheduleController";
 
     /* XML PARSING TAG AND PARAMS */
     public static final String TITLE_ELEMENT = "td[class=title]";
@@ -38,6 +40,12 @@ public class Constants {
 
     public static final String JPEG = ".jpg";
 
+    /* push message */
+    public static final String GOOGLE_API_KEY = "AlzaSyCVKcj50siRLfgtFd6QaiVoP3Yual1Ya";
+    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+
+
     /* BackKeyHandler */
     public static final String BACK_BTN_CLICK = "\'뒤로\'버튼을 한번 더 누르시면 종료 됩니다.";
 
@@ -53,6 +61,6 @@ public class Constants {
     public static final String CLUB_COSCI = "#co0000";
     public static final String CLUB_OS = "#os0000";
 
-    /* ACTIVITY check*/
     public static int num = 0;
+
 }
