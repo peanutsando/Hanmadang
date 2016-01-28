@@ -57,9 +57,9 @@ public class ClubActivity extends AppCompatActivity {
         // DB에서 글목록 갖고오기
         loadData();
 
+        listView.setSelection(0);
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
-
         // 새로 정의한 리스너로 객체를 만들어 설정
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -79,7 +79,6 @@ public class ClubActivity extends AppCompatActivity {
                 startActivityForResult(intent, READ_ACTIVITY);
             }
         });
-
     }
 
     public void createListView(String title, String timestamp, String writer) {
@@ -110,11 +109,7 @@ public class ClubActivity extends AppCompatActivity {
                     createListView(title, timestamp, writer);
 
                     intent = new Intent(getApplicationContext(), MainActivity.class);
-                    Bundle extra = new Bundle();
-                    String act = "club";
-                    extra.putString("who", act);
-                    intent.putExtras(extra);
-
+                    Constants.num++;
                     startActivity(intent);
                     /*
                         adapter.getListItems().clear();
@@ -124,11 +119,6 @@ public class ClubActivity extends AppCompatActivity {
                 case READ_ACTIVITY:
                     // adapter.getListItems().clear(); // -> 화면 refresh 는 TabHost 가 적용이되지 않고 clubactivity만 적용되서 TAB이 안 나타나기 때문에 수정
                     intent = new Intent(getApplicationContext(), MainActivity.class);
-                    Bundle r_extra = new Bundle();
-                    String r_act = "club";
-                    r_extra.putString("who", r_act);
-                    intent.putExtras(r_extra);
-
                     startActivity(intent);
 
                     break;

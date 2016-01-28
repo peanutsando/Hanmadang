@@ -51,4 +51,6 @@ public class Constants {
     public static final String CLUB_COSCI = "#co0000";
     public static final String CLUB_OS = "#os0000";
 
+    /* ACTIVITY check*/
+    public static int num = 0;
 }

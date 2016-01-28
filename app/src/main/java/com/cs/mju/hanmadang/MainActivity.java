@@ -24,13 +24,10 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String act = intent.getExtras().getString("who");
-        if(act.equals("splash")) {
+        if(Constants.num == 0)
             createTabHost(0);
-        }else if(act.equals("club")){
+        else
             createTabHost(1);
-        }
     }
 
     public void setFlag(int flag) {
