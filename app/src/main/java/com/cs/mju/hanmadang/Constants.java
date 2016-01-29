@@ -4,6 +4,9 @@ package com.cs.mju.hanmadang;
  * Created on Youthink on 2016-01-04
  */
 public class Constants {
+    /* APP NAME */
+    public static final String HANMADANG = "한마당";
+
     /* URL */
     public static final String NOTICE_URL = "http://jw4.mju.ac.kr/user/boardList.action?boardId=28510945&page=1";
     public static final String CLUB_URL = "http://117.17.158.234:8080/Hanmadang/ClubController";

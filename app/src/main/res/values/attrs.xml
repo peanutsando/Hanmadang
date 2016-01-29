@@ -6,6 +6,6 @@
   <attr name="month" format="integer" />  
   <attr name="day" format="integer" />  
   <attr name="hour" format="integer" />  
-  <attr name="minute" format="integer" />  
- </declare-styleable>  
-</resources> 
+  <attr name="minute" format="integer" />
+ </declare-styleable>
+</resources>

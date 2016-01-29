@@ -25,11 +25,7 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Constants.num == 0) {
-            createTabHost(0);
-        }else{
-            createTabHost(1);
-        }
+        createTabHost(Constants.num);
     }
 
     private void getRegTokenKey() {
@@ -52,7 +48,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tabHost.newTabSpec("Club").setIndicator(getString(R.string.club)).setContent(new Intent(this, ClubActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("Date").setIndicator(getString(R.string.date)).setContent(new Intent(this, DateActivity.class)));
 
-     //   getRegTokenKey();
+        getRegTokenKey();
         tabHost.setCurrentTab(pos);
     }
 

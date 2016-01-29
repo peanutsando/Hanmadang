@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
 import com.google.android.gms.gcm.GcmListenerService;
@@ -71,9 +72,9 @@ public class MyGcmListenerService extends GcmListenerService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.hanmadang_icon_img)
+                .setSmallIcon(R.drawable.hanmadang_noti_icon)
                 .setTicker(message)
-                .setContentTitle("GCM Message")
+                .setContentTitle(Constants.HANMADANG)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
