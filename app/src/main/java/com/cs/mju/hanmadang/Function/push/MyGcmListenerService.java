@@ -70,6 +70,7 @@ public class MyGcmListenerService extends GcmListenerService {
      */
     private void sendNotification(String message) {
         Intent intent = new Intent();
+        String tab = "";
         Bundle args = new Bundle();
         int position;
         switch (Constants.num) {
@@ -78,7 +79,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 jsonParser.parseJSONFromURL(Constants.CLUB_URL);
                 position = (jsonParser.object.size() - 1);
                 args.putInt("pos", position);
-
+                tab += " : " + getString(R.string.club) + " " + getString(R.string.alarm);
                 intent.putExtras(args);
                 break;
             case 2:
@@ -93,7 +94,7 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.hanmadang_noti_icon)
                 .setTicker(message)
-                .setContentTitle(Constants.HANMADANG)
+                .setContentTitle(Constants.HANMADANG + tab)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
