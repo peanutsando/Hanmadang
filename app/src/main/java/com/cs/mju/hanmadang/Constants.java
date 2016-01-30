@@ -48,6 +48,7 @@ public class Constants {
     public static final String GOOGLE_API_KEY = "AIzaSyCVKcCj50siRLfgtFd6Q6aiVOP3YuaI1YA";
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
+    public static String registerTokenKey = "";
 
 
     /* BackKeyHandler */

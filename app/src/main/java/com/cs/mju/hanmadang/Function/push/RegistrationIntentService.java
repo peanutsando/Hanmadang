@@ -72,6 +72,7 @@ public class RegistrationIntentService extends IntentService {
                     outputStreamWriter.write(token);
 
                     outputStreamWriter.close();
+                    Constants.registerTokenKey = token;
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 }catch (Exception e){
                     e.printStackTrace();

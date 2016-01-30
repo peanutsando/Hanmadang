@@ -50,9 +50,15 @@ public class PushJsonParser {
         getTokenKeyFromURL(Constants.REG_URL);
         MulticastResult result;
         int size = object.size();
-        for (int i = 0; i < size; i++) {
-            keyList.add(i, object.get(i).getReg_key());
+        int i = 0, j = 0;
+        while(i != size){
+            if(!(object.get(i).getReg_key().equals(Constants.registerTokenKey))) {
+                keyList.add(j, object.get(i).getReg_key());
+                j++;
+            }
+            i++;
         }
+
         try {
             result = sender.send(message, keyList, 1);
             if (result != null) {

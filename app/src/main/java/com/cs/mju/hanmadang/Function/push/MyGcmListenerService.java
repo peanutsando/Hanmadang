@@ -13,6 +13,10 @@ import android.util.Log;
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
+import com.cs.mju.hanmadang.Tab.Club.ClubReadActivity;
+import com.cs.mju.hanmadang.Tab.Club.JSONParser;
+import com.cs.mju.hanmadang.Tab.ClubActivity;
+import com.cs.mju.hanmadang.Tab.DateActivity;
 import com.google.android.gms.gcm.GcmListenerService;
 
 /**
@@ -21,7 +25,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
-
+    private JSONParser jsonParser = new JSONParser();
     /**
      * Called when message is received.
      *
@@ -65,11 +69,26 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message GCM message received.
      */
     private void sendNotification(String message) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent();
+        Bundle args = new Bundle();
+        int position;
+        switch (Constants.num) {
+            case 1:
+                intent = new Intent(this, ClubReadActivity.class);
+                jsonParser.parseJSONFromURL(Constants.CLUB_URL);
+                position = (jsonParser.object.size() - 1);
+                args.putInt("pos", position);
+
+                intent.putExtras(args);
+                break;
+            case 2:
+                intent = new Intent(this, DateActivity.class);
+                break;
+            default:
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
-
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.hanmadang_noti_icon)

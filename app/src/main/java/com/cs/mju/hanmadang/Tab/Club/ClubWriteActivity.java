@@ -138,8 +138,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             this.finish();
         } else if (v.getId() == R.id.writeButton) {
             /* ClubActivity 로 전송할 내용들 (바로 적용시키기 위하여) */
-            saveData(); // 알림푸쉬
-            //   sendPushMessage();
+            saveData();
             sendDataToClubActivity();
             /* 서버에 데이터 전송하고 종료 */
             PushJsonParser jsonParser = new PushJsonParser();
@@ -323,7 +322,6 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
                     out.write("&*&");
                     out.write(strCurDate);
 
-                    Log.e("sadfsfd", title + " " + content + " " + writer);
                     out.close();
 
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
