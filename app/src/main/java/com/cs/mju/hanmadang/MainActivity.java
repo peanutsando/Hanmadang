@@ -25,10 +25,6 @@ public class MainActivity extends TabActivity {
         createTabHost(Constants.num);
     }
 
-    private void getRegTokenKey() {
-        Intent intent = new Intent(this, RegistrationIntentService.class);
-        startService(intent);
-    }
 
     public void setFlag(int flag) {
         this.flag = flag;
@@ -45,7 +41,6 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tabHost.newTabSpec("Club").setIndicator(getString(R.string.club)).setContent(new Intent(this, ClubActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("Date").setIndicator(getString(R.string.date)).setContent(new Intent(this, DateActivity.class)));
 
-        getRegTokenKey();
         tabHost.setCurrentTab(pos);
     }
 }

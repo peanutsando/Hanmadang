@@ -12,6 +12,9 @@
     <string name="addSchedule">일정추가</string>
     <string name="attach_tag">첨부파일 :</string>
 
-    <!-- Setting String-->
+    <string name="parsing_notice">Set Parsing</string>
+    <string name="setNoticeNumber">Set Notice Number</string>
 
+    <!-- Setting String-->
+    <string name="title_activity_settings"></string>
 </resources>

@@ -27,13 +27,21 @@ public class Splash extends Activity {
             public void run() {
                 // 3초간 화면 보여주고 끝
                 // 화면 끝나고 메인 실행
+                getRegTokenKey();
                 Intent i = new Intent(Splash.this, MainActivity.class);
-
+                Intent intent = new Intent(Splash.this, ParsingService.class);
+                startService(intent);
                 startActivity(i);
                 // close this activity
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+
+    private void getRegTokenKey() {
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 
 }
