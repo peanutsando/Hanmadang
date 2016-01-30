@@ -101,7 +101,6 @@
             />
     </RelativeLayout>
 
-
     <TextView
         android:id="@+id/write_borderLine3"
         android:layout_width="match_parent"
@@ -168,18 +167,19 @@
             android:layout_toRightOf="@id/key"
             android:layout_marginLeft="10dp"
             android:ems="10"
-            
             android:hint=" 키를 입력하세요"
             android:inputType="textMultiLine" />
 
         <Button
             android:id="@+id/keyButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_toRightOf="@id/inputKey"
             android:layout_marginLeft="5dp"
             android:layout_alignBaseline="@id/inputKey"
-            android:text="확인"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@drawable/large_check"
             />
     </RelativeLayout>
 
@@ -189,26 +189,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/keyLayout"
         android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="35dp"
         android:padding="10dp">
 
         <Button
             android:id="@+id/writeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:text="글쓰기"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="60dp"
             android:gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@drawable/write_btn"
             />
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@id/writeButton"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="10dp"
-            android:text="취소"
+            android:layout_marginLeft="70dp"
             android:gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@drawable/cancel_button"
             />
 
     </RelativeLayout>

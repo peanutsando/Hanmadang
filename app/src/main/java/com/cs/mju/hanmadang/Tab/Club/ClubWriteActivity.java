@@ -18,10 +18,6 @@ import android.widget.Toast;
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.PushJsonParser;
 import com.cs.mju.hanmadang.R;
-import com.google.android.gcm.server.Message;
-import com.google.android.gcm.server.MulticastResult;
-import com.google.android.gcm.server.Result;
-import com.google.android.gcm.server.Sender;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,9 +25,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ClubWriteActivity extends AppCompatActivity implements View.OnClickListener {
     private Button writeButton;
@@ -332,5 +326,4 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             }
         }).start();
     }
-
 }

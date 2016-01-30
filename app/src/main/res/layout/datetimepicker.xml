@@ -34,10 +34,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/timePicker"
-			android:layout_alignBottom="@+id/schedule"
 			android:hint="일정을 입력하세요"
 			android:cursorVisible="true"
-			android:layout_toEndOf="@+id/schedule" />
+			/>
 
 		<EditText
 			android:id="@+id/editPlace"
@@ -46,7 +45,8 @@
 			android:layout_below="@+id/editTitle"
 			android:hint="장소"
 			android:cursorVisible="true"
-			android:layout_toEndOf="@+id/schedule" />
+
+			  />
 
 		<EditText
 			android:id="@+id/editContent"
@@ -56,7 +56,7 @@
 			android:hint="설명"
 			android:cursorVisible="true"
 			android:inputType="text"
-			android:layout_toEndOf="@+id/schedule" />
+			 />
 
 		<DatePicker
 			android:id="@+id/datePicker"
@@ -68,27 +68,30 @@
 
 		<Button
 			android:id="@+id/addButton"
-			android:layout_width="100dp"
-			android:layout_height="wrap_content"
+			android:layout_width="80dp"
+			android:layout_height="40dp"
 			android:layout_below="@id/editContent"
-			android:layout_marginLeft="60dp"
+			android:layout_marginLeft="50dp"
+			android:layout_marginRight="10dp"
 			android:layout_marginTop="16dp"
-			android:drawableLeft="@drawable/ok_btn"
-			android:text="추가"
+			android:gravity="center"
+			android:adjustViewBounds="true"
+			android:scaleType="fitStart"
+			android:background="@drawable/large_check"
 			/>
 
 		<Button
 			android:id="@+id/cancelButton"
-			android:layout_width="100dp"
-			android:layout_height="wrap_content"
+			android:layout_width="80dp"
+			android:layout_height="40dp"
 			android:layout_below="@id/editContent"
 			android:layout_toRightOf="@id/addButton"
 			android:layout_marginLeft="60dp"
 			android:layout_marginTop="16dp"
-			android:drawableLeft="@drawable/cancel_btn"
-			android:text="취소"
-			android:layout_alignParentEnd="false"
-			android:layout_alignParentStart="false" />
+			android:adjustViewBounds="true"
+			android:scaleType="fitStart"
+			android:gravity="center"
+			android:background="@drawable/cancel_button"/>
 
 	</RelativeLayout>
 </ScrollView>
