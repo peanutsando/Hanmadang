@@ -38,11 +38,8 @@ public class ParsingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+        count = preferences.getString("NoticeNumber", "");
         registerAlarm(this, Constants.CHECK_TIMER);
-        count = preferences.getString("NoticeNumber", noticeNumber);
-        Log.e("Default Count", count);
-
         getNoticeTask = new GetNoticeTask();
         getNoticeTask.execute();
 
@@ -61,12 +58,13 @@ public class ParsingService extends Service {
                         preferences = getSharedPreferences("Hanmadang", MODE_PRIVATE);
                         noticeNumber = e.text();
                         Log.e(getClass().getSimpleName(), "noticceNumber = " + noticeNumber +" count=" + count);
-                        if (!(count.equals(noticeNumber))) {
+                        if (!(count.equals(noticeNumber)) || count == null) {
                             edit.putString("NoticeNumber", noticeNumber);
                             edit.commit();
+                            count = preferences.getString("NoticeNumber", noticeNumber);
                             PushJsonParser jsonParser = new PushJsonParser();
                             Constants.check_tab = 0;
-                            jsonParser.sendPushMessage("새로운 공지사항이 있습니다.");
+                            jsonParser.sendPushMessage(Constants.NEW_NOTICE);
                         }
                         break;
                     }

@@ -51,6 +51,7 @@ public class Constants {
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
     public static String registerTokenKey = "";
+    public static final String NEW_NOTICE = "새로운 공지사항이 있습니다.";
 
     /* BackKeyHandler */
     public static final String BACK_BTN_CLICK = "\'뒤로\'버튼을 한번 더 누르시면 종료 됩니다.";
@@ -71,5 +72,6 @@ public class Constants {
     public static int check_tab = 0;
     public static int write = 0;
 
+//    public static final long CHECK_TIMER = 3000;
     public static final long CHECK_TIMER = 1800000;
 }

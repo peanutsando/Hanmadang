@@ -26,6 +26,7 @@ public class BackKeyHandler {
         }
         if(System.currentTimeMillis() <= keyPressTime + 2000){
             activity.finish();
+            Constants.num = 0;
             toast.cancel();
         }
     }
