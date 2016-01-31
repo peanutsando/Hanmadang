@@ -138,14 +138,22 @@ public class DateActivity extends AppCompatActivity {
         monthText.setText(curYear + "년 " + (curMonth+1) + "월");
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
         if(resultCode == 1){
+            /*
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             Constants.num = 2;
             monthViewAdapter.notifyDataSetInvalidated();
             monthViewAdapter.notifyDataSetChanged();
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            */
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            Constants.num = 2;
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            monthViewAdapter.notifyDataSetChanged();
+
             startActivity(intent);
         }else if(resultCode == 2){
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();

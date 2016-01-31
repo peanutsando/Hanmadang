@@ -1,27 +1,24 @@
 package com.cs.mju.hanmadang.Tab.Date;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
-import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+//import android.support.v4.view.ViewPager;
 
 /**
  * Created by Joguk_1 on 2016-01-13.
@@ -172,8 +169,8 @@ public class SelectSchedule extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (resultCode == 1) {
             super.onResume();
             Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
@@ -192,9 +189,12 @@ public class SelectSchedule extends ActionBarActivity {
 
 //            createListView(title, timestamp, writer);
             adapter.notifyDataSetChanged();
+
+            intent = getIntent();
+            finish();
+            startActivity(intent);
         } else if (resultCode == 2) {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
         }
     }
-
 }
