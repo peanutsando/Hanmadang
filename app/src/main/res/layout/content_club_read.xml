@@ -195,8 +195,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:layout_toRightOf="@id/delButton"
         android:layout_marginLeft="30dp"
         android:gravity="center_horizontal"
-        android:background="@drawable/modify_btn"
-        />
+        android:background="@drawable/modify_btn"/>
 
 </RelativeLayout>
 </RelativeLayout>
