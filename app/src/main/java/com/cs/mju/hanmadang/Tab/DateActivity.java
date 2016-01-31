@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.BackKeyHandler;
+import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Tab.Date.AddSchedule;
 import com.cs.mju.hanmadang.Tab.Date.CalendarMonthAdapter;
@@ -120,7 +121,6 @@ public class DateActivity extends AppCompatActivity {
                 setMonthText();
             }
         });
-
     }
 
     private void initDate(){
@@ -141,8 +141,9 @@ public class DateActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 1){
-//            Toast.makeText(this, "응답으로 전달된 년도" + year, Toast.LENGTH_LONG).show();
-            Toast.makeText(this, "데이터베이스에 저장.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Constants.num = 2;
+            startActivity(intent);
         }else if(resultCode == 2){
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
             initDate();

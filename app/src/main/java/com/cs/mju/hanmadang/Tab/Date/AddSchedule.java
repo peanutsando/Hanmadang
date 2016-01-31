@@ -21,6 +21,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 public class AddSchedule extends ActionBarActivity implements View.OnClickListener {
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
@@ -28,8 +29,8 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
     DateTimePicker dateTimePicker;
     private Button addButton, cancelButton;
     // 텍스트 값
-    EditText tempTitle, tempPlace, tempContent;
-    String title, place, content, timestamp;
+    private EditText tempTitle, tempPlace, tempContent;
+    private String title, place, content, timestamp;
     int selectedYear, selectedMonth, selectedDay, currentHour, currentMinute, currentSecond;
     // 결과 인텐트
     final Intent resultIntent = new Intent();
@@ -39,15 +40,9 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_chooser);
         calCurrentTime();
-
         // 버튼 참조
-        currentTime = (TextView)findViewById(R.id.currentTime);
-        dateTimePicker = (DateTimePicker)findViewById(R.id.dateTimePicker);
-        tempTitle = (EditText)findViewById(R.id.editTitle);
-        tempPlace = (EditText)findViewById(R.id.editPlace);
-        tempContent = (EditText)findViewById(R.id.editContent);
-
         initViews();
+
         addListenersToView();
 
         // 이벤트 처리
@@ -55,8 +50,8 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             public void onDateTimeChanged(DateTimePicker view, int year,
                                           int monthOfYear, int dayOfYear, int hourOfDay, int minute) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(getIntent().getIntExtra("selectedYear",0), getIntent().getIntExtra("selectedMonth",0), getIntent().getIntExtra("selectedDay",0), hourOfDay, minute);
-                timestamp = year + "-" + (monthOfYear+1) + "-" + dayOfYear + " " + hourOfDay  + ":" + minute + ":" + currentSecond;
+                calendar.set(getIntent().getIntExtra("selectedYear", 0), getIntent().getIntExtra("selectedMonth", 0), getIntent().getIntExtra("selectedDay", 0), hourOfDay, minute);
+                timestamp = year + "-" + (monthOfYear + 1) + "-" + dayOfYear + " " + hourOfDay + ":" + minute + ":" + currentSecond;
 
                 // 결과 인테트에 저장
                 resultIntent.putExtra("title", title);
@@ -74,16 +69,57 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         });
 
         // 현재 시간 텍스트뷰에 표시
-        Calendar calendar = Calendar.getInstance();
-//      calendar.set(dateTimePicker.getYear(), dateTimePicker.getMonth(), dateTimePicker.getDayOfMonth(), dateTimePicker.getCurrentHour(), dateTimePicker.getCurrentMinute());
-        calendar.set(getIntent().getIntExtra("selectedYear",0), getIntent().getIntExtra("selectedMonth",0), getIntent().getIntExtra("selectedDay",0), currentHour, currentMinute);
-        currentTime.setText(dateFormat.format(calendar.getTime()));
-
+        initTime();
     }
 
     private void initViews() {
+        currentTime = (TextView)findViewById(R.id.currentTime);
+        dateTimePicker = (DateTimePicker)findViewById(R.id.dateTimePicker);
+        tempTitle = (EditText)findViewById(R.id.editTitle);
+        tempPlace = (EditText)findViewById(R.id.editPlace);
+        tempContent = (EditText)findViewById(R.id.editContent);
         addButton = (Button)findViewById(R.id.addButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
+
+        // 수정페이지 일 경우 텍스트 입력
+        if(getIntent().getStringExtra("title")!=null){
+            tempTitle.setText(getIntent().getStringExtra("title"));
+            tempPlace.setText(getIntent().getStringExtra("place"));
+            tempContent.setText(getIntent().getStringExtra("content"));
+        }
+        // 추가 버튼 수정 버튼으로 체인지
+        if (getIntent().getStringExtra("title")!=null)
+            addButton.setText("수정");
+        else
+            addButton.setText("추가");
+        // 현재시간 버튼 추가 버튼으로 체인지
+        if (getIntent().getStringExtra("title")!=null)
+            currentTime.setText("일정 수정");
+
+    }
+
+    // 현재시간 텍스트뷰에 표시
+    private void initTime(){
+        if(getIntent().getStringExtra("title")!=null){ // 업데이트 일 시 현재시간이 아닌 받아온 시간을 표시
+            StringTokenizer tokens = new StringTokenizer(getIntent().getStringExtra("timestamp"));
+            String year = tokens.nextToken("-");
+            String month = tokens.nextToken("-");
+
+            String date = tokens.nextToken(" ");
+            String[] temp = date.split("-");
+
+            String hour = tokens.nextToken(":");
+            String[] temp2 = hour.split(" ");
+
+            String minute = tokens.nextToken(":");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Integer.parseInt(year), Integer.parseInt(month)-1, Integer.parseInt(temp[1]), Integer.parseInt(temp2[1]), Integer.parseInt(minute));
+            currentTime.setText(dateFormat.format(calendar.getTime()));
+        }else{ // 그냥  추가일 경우 현재 시간
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(getIntent().getIntExtra("selectedYear", 0), getIntent().getIntExtra("selectedMonth", 0), getIntent().getIntExtra("selectedDay", 0), currentHour, currentMinute);
+            currentTime.setText(dateFormat.format(calendar.getTime()));
+        }
     }
 
     // 현재 시간 계산하기
@@ -109,15 +145,31 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             Intent resultIntent = new Intent();
             setResult(1, resultIntent);
             writedTextSave();
-            saveData();
+            if(getIntent().getStringExtra("title")!=null){
+                updateData();
+            }else{
+                saveData();
+            }
             finish();
         }
     }
 
     private void writedTextSave() {
-        title = tempTitle.getText().toString();
-        place = tempPlace.getText().toString();
-        content = tempContent.getText().toString();
+        if(tempTitle.length()==0){
+            title = "내용없음";
+        }else{
+            title = tempTitle.getText().toString();
+        }
+        if(tempTitle.length()==0){
+            place = "내용없음";
+        }else{
+            place = tempPlace.getText().toString();
+        }
+        if(tempTitle.length()==0){
+            content = "내용없음";
+        }else{
+            content = tempContent.getText().toString();
+        }
     }
 
     private void saveData() {
@@ -132,6 +184,55 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
 
                     /* 데이터 전송, &*&은 데이터를 구분할 토큰 */
                     OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                    out.write(title);
+                    out.write("&*&");
+                    out.write(place);
+                    out.write("&*&");
+                    out.write(content);
+                    out.write("&*&");
+                    out.write(timestamp);
+
+                    out.close();
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    Log.e("저장가자!", "저장가자!");
+                }catch(Exception e) {
+                    Log.d("Exception", e.toString());
+                }
+            }
+        }).start();
+
+        this.finish();
+    }
+
+    private void updateData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(Constants.SCHEDULE_MOD_URL);
+                    URLConnection conn = url.openConnection();
+
+                    conn.setDoOutput(true);
+
+                    Log.e("이전 제목", getIntent().getStringExtra("title"));
+                    Log.e("이전 장소", getIntent().getStringExtra("place"));
+                    Log.e("이전 내용", getIntent().getStringExtra("content"));
+                    Log.e("이전 시간", getIntent().getStringExtra("timestamp"));
+                    Log.e("바뀐 제목", title);
+                    Log.e("바뀐 장소", place);
+                    Log.e("바뀐 내용", content);
+                    Log.e("바뀐 시간", timestamp);
+                    /* 데이터 전송, &*&은 데이터를 구분할 토큰 */
+                    OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                    out.write(getIntent().getStringExtra("title"));
+                    out.write("&*&");
+                    out.write(getIntent().getStringExtra("place"));
+                    out.write("&*&");
+                    out.write(getIntent().getStringExtra("content"));
+                    out.write("&*&");
+                    out.write(getIntent().getStringExtra("timestamp"));
+                    out.write("@@");
                     out.write(title);
                     out.write("&*&");
                     out.write(place);

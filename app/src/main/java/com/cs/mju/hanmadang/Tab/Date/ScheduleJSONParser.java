@@ -34,9 +34,6 @@ public class ScheduleJSONParser {
                 }.getType();
                 object = gson.fromJson(reader, listType);
 
-                    for (int i = 0; i < object.size(); i++) {
-                        Log.e("Sevlet Android text", object.get(i).getTitle() + " " + object.get(i).getPlace() + " " + object.get(i).getContent() + " " + object.get(i).getTimestamp());
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -21,56 +21,43 @@ public class CalendarMonthView extends GridView {
 		super(context);
 		init();
 	}
-
 	// 생성자
 	public CalendarMonthView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
-
 	// 속성 초기화
 	private void init() {
 		setBackgroundColor(Color.GRAY);
 		setVerticalSpacing(1);
 		setHorizontalSpacing(1);
-
 		setLayoutParams(new GridView.LayoutParams(85,200));
-
 		setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-
 		// 칼럼의 갯수 설정
 		setNumColumns(7);
-
 		// 그리드뷰의 원래 이벤트 처리 리스너 설정
 		setOnItemClickListener(new OnItemClickAdapter());
 	}
-
 	// 어댑터 설정
 	public void setAdapter(BaseAdapter adapter) {
 		super.setAdapter(adapter);
-
 		this.adapter = (CalendarMonthAdapter) adapter;
 	}
-
 	// 어댑터 객체 리턴
 	public BaseAdapter getAdapter() {
 		return (BaseAdapter)super.getAdapter();
 	}
-
 	// 리스너 설정
 	public void setOnDataSelectionListener(OnDataSelectionListener listener) {
 		this.selectionListener = listener;
 	}
-
 	// 리스너 객체 리턴
 	public OnDataSelectionListener getOnDataSelectionListener() {
 		return selectionListener;
 	}
 
 	class OnItemClickAdapter implements OnItemClickListener {
-
 		public OnItemClickAdapter() { }
-
 		public void onItemClick(AdapterView parent, View v, int position, long id) {
 			if (adapter != null) {
 				adapter.setSelectedPosition(position);

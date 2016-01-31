@@ -1,7 +1,9 @@
 package com.cs.mju.hanmadang.Tab.Date;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+//import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -10,10 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
+import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
 
 import java.text.SimpleDateFormat;
@@ -23,13 +27,18 @@ import java.util.Calendar;
  * Created by Joguk_1 on 2016-01-13.
  */
 public class SelectSchedule extends ActionBarActivity {
-    public static final int REQUEST_CODE_SELECTADD = 1002;
+    public static final int REQUEST_CODE_SELECTED = 1002;
+    public static final int REQUEST_CODE_MODIFIED = 1003;
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
-    ListView listView1;
-    ScheduleListAdapter adapter;
-    TextView textView1;
+    private ListView listView1;
+    private ScheduleListAdapter adapter;
+    private TextView textView1;
+    private Button deleteButton, writeButton, backButton;
+    private String[] curData;
+    private String date;
+
     int selectedYear, selectedMonth, selectedDay;
-    ScheduleJSONParser jsonParser = new ScheduleJSONParser();
+    ScheduleJSONParser jsonParser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +48,12 @@ public class SelectSchedule extends ActionBarActivity {
         // 리스트뷰 객체 참조
         listView1 = (ListView) findViewById(R.id.listView1);
         // 텍스트뷰 객체 참조
-        textView1 = (TextView)findViewById(R.id.textView1);
+        textView1 = (TextView) findViewById(R.id.textView1);
+        backButton = (Button) findViewById(R.id.backButton);
+        writeButton = (Button) findViewById(R.id.writeButton);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
+
+        jsonParser = new ScheduleJSONParser();
 
         //날짜 세팅
         setDate();
@@ -58,14 +72,23 @@ public class SelectSchedule extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ScheduleItem curItem = (ScheduleItem) adapter.getItem(position);
-                String[] curData = curItem.getData();
+                curData = curItem.getData();
 
-                Toast.makeText(getApplicationContext(), "Selected : " + curData[0], Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
+
+                intent.putExtra("selectedYear", getIntent().getIntExtra("selectedYear", 0));
+                intent.putExtra("selectedMonth", getIntent().getIntExtra("selectedMonth", 0));
+                intent.putExtra("selectedDay", getIntent().getIntExtra("selectedDay", 0));
+                intent.putExtra("title", curData[0]);
+                intent.putExtra("place", curData[1]);
+                intent.putExtra("content", curData[2]);
+                intent.putExtra("timestamp", curData[3]);
+
+                startActivityForResult(intent, REQUEST_CODE_MODIFIED);
             }
         });
 
         // 백버튼 이벤트 처리
-        Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setResult(3);
@@ -73,18 +96,53 @@ public class SelectSchedule extends ActionBarActivity {
             }
         });
 
-        // 글쓰기 버튼
-        Button writeButton = (Button) findViewById(R.id.writeButton);
+        // 글쓰기 버튼 이벤트 처리
         writeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
 
-                intent.putExtra("selectedYear", getIntent().getIntExtra("selectedYear",0));
-                intent.putExtra("selectedMonth", getIntent().getIntExtra("selectedMonth",0));
-                intent.putExtra("selectedDay", getIntent().getIntExtra("selectedDay",0));
-                startActivityForResult(intent, REQUEST_CODE_SELECTADD);
+                intent.putExtra("selectedYear", getIntent().getIntExtra("selectedYear", 0));
+                intent.putExtra("selectedMonth", getIntent().getIntExtra("selectedMonth", 0));
+                intent.putExtra("selectedDay", getIntent().getIntExtra("selectedDay", 0));
+                startActivityForResult(intent, REQUEST_CODE_SELECTED);
             }
         });
+
+        // 지우기 버튼 이벤트 처리
+//        Log.d("deleteButton", deleteButton.toString());
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            URL url = new URL(Constants.SCHEDULE_MOD_URL);
+//                            URLConnection conn = url.openConnection();
+//
+//                            conn.setDoOutput(true);
+//
+//                            /* 데이터 전송, &*&은 데이터를 구분할 토큰 */
+//                            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+//                            out.write(curData[0]);
+//                            out.write("&*&");
+//                            out.write(curData[1]);
+//                            out.write("&*&");
+//                            out.write(curData[2]);
+//                            out.write("&*&");
+//                            out.write(date);
+//
+//                            out.close();
+//
+//                            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//                        } catch (Exception e) {
+//                            Log.d("Exception", e.toString());
+//                        }
+//                    }
+//                }).start();
+//
+////                finish();
+//            }
+//        });
     }
 
     private void loadData() {
@@ -94,31 +152,36 @@ public class SelectSchedule extends ActionBarActivity {
         String place;
         String content;
         String date;
-        // 10월 전이면 월 앞에 0을 붙이는 작업
-        if(getIntent().getIntExtra("selectedMonth", 0)+1<10){
-            date = getIntent().getIntExtra("selectedYear", 0) + "-" + "0"+(getIntent().getIntExtra("selectedMonth", 0)+1) + "-" + getIntent().getIntExtra("selectedDay", 0);
-        }else{
-            date = getIntent().getIntExtra("selectedYear", 0) + "-" + (getIntent().getIntExtra("selectedMonth", 0)+1) + "-" + getIntent().getIntExtra("selectedDay", 0);
+        String timestamp;
+        // 10월 전이면 월 앞에 0을 붙이는 작업, 10일 전 일 경우 0을 붙이는 작업
+        if (getIntent().getIntExtra("selectedMonth", 0) + 1 < 10) {
+            if(getIntent().getIntExtra("selectedDay", 0)<10)
+                date = getIntent().getIntExtra("selectedYear", 0) + "-" + "0" + (getIntent().getIntExtra("selectedMonth", 0) + 1) + "-" + "0" + getIntent().getIntExtra("selectedDay", 0);
+            else
+                date = getIntent().getIntExtra("selectedYear", 0) + "-" + "0" + (getIntent().getIntExtra("selectedMonth", 0) + 1) + "-" + getIntent().getIntExtra("selectedDay", 0);
+        } else {
+            if(getIntent().getIntExtra("selectedDay", 0)<10)
+                date = getIntent().getIntExtra("selectedYear", 0) + "-" + (getIntent().getIntExtra("selectedMonth", 0) + 1) + "-" + "0" + getIntent().getIntExtra("selectedDay", 0);
+            else
+                date = getIntent().getIntExtra("selectedYear", 0) + "-" + (getIntent().getIntExtra("selectedMonth", 0) + 1) + "-" + getIntent().getIntExtra("selectedDay", 0);
         }
-        Log.e("date ", date);
 
-        for(int i=0; i<jsonParser.object.size(); i++) {
+        for (int i = 0; i < jsonParser.object.size(); i++) {
             String[] str = jsonParser.object.get(i).getTimestamp().split(" ");
-            Log.e("str[0] ", str[0]);
-            if(str[0].equals(date)){
-                Log.e("일치, addItem ", date + "=" + str[0]);
+            if (str[0].equals(date)) {
                 title = jsonParser.object.get(i).getTitle();
                 place = jsonParser.object.get(i).getPlace();
                 content = jsonParser.object.get(i).getContent();
+                timestamp = jsonParser.object.get(i).getTimestamp();
 
-                adapter.addItem(new ScheduleItem(title, place, content));
+                adapter.addItem(new ScheduleItem(title, place, content, timestamp));
             }
         }
     }
 
-    private void setDate(){
+    private void setDate() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(getIntent().getIntExtra("selectedYear",0), getIntent().getIntExtra("selectedMonth",0), getIntent().getIntExtra("selectedDay",0));
+        calendar.set(getIntent().getIntExtra("selectedYear", 0), getIntent().getIntExtra("selectedMonth", 0), getIntent().getIntExtra("selectedDay", 0));
         textView1.setText(dateFormat.format(calendar.getTime()));
     }
 
@@ -144,13 +207,19 @@ public class SelectSchedule extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 1){
-//            Toast.makeText(this, "응답으로 전달된 년도" + year, Toast.LENGTH_LONG).show();
-            Toast.makeText(this, "데이터베이스에 저장.", Toast.LENGTH_LONG).show();
-        }else if(resultCode == 2){
+        if (resultCode == 1) {
+            super.onStart();
+            Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
+            intent.putExtra("selectedYear",  getIntent().getIntExtra("selectedYear", 0));
+            intent.putExtra("selectedMonth",  getIntent().getIntExtra("selectedMonth", 0));
+            intent.putExtra("selectedDay",  getIntent().getIntExtra("selectedDay", 0));
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        } else if (resultCode == 2) {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
         }
     }
+
 }

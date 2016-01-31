@@ -13,14 +13,8 @@ import android.widget.GridView;
 
 import java.util.Calendar;
 
-/**
- * 어댑터 객체 정의
- *
- * @author Mike
- *
- */
+// 어댑터 객체 정의
 public class CalendarMonthAdapter extends BaseAdapter {
-
 	public static final String TAG = "CalendarMonthAdapter";
 
 	Context mContext;
@@ -47,17 +41,13 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
 	public CalendarMonthAdapter(Context context) {
 		super();
-
 		mContext = context;
-
 		init();
 	}
 
 	public CalendarMonthAdapter(Context context, AttributeSet attrs) {
 		super();
-
 		mContext = context;
-
 		init();
 	}
 
@@ -78,19 +68,18 @@ public class CalendarMonthAdapter extends BaseAdapter {
 		// get week day
 		int dayOfWeek = mCalendar.get(Calendar.DAY_OF_WEEK);
 		firstDay = getFirstDay(dayOfWeek);
-		Log.d(TAG, "firstDay : " + firstDay);
+//		Log.d(TAG, "firstDay : " + firstDay);
 
 		mStartDay = mCalendar.getFirstDayOfWeek();
 		curYear = mCalendar.get(Calendar.YEAR);
 		curMonth = mCalendar.get(Calendar.MONTH);
 		lastDay = getMonthLastDay(curYear, curMonth);
 
-		Log.d(TAG, "curYear : " + curYear + ", curMonth : " + curMonth + ", lastDay : " + lastDay);
+//		Log.d(TAG, "curYear : " + curYear + ", curMonth : " + curMonth + ", lastDay : " + lastDay);
 
 		int diff = mStartDay - Calendar.SUNDAY - 1;
 		startDay = getFirstDayOfWeek();
-		Log.d(TAG, "mStartDay : " + mStartDay + ", startDay : " + startDay);
-
+//		Log.d(TAG, "mStartDay : " + mStartDay + ", startDay : " + startDay);
 	}
 
 	public void setPreviousMonth() {
@@ -166,7 +155,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.d(TAG, "getView(" + position + ") called.");
+//		Log.d(TAG, "getView(" + position + ") called.");
 
 		MonthItemView itemView;
 		if (convertView == null) {
@@ -177,16 +166,16 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
 		// create a params
 		GridView.LayoutParams params = new GridView.LayoutParams(
-				GridView.LayoutParams.MATCH_PARENT, 230);
+				GridView.LayoutParams.MATCH_PARENT, 270);
 
 		// calculate row and column
 		int rowIndex = position / countColumn;
 		int columnIndex = position % countColumn;
 
-		Log.d(TAG, "Index : " + rowIndex + ", " + columnIndex);
+//		Log.d(TAG, "Index : " + rowIndex + ", " + columnIndex);
 
 		// set item data and properties
-		itemView.setItem(items[position]);
+		itemView.setItem(items[position], getCurYear(), getCurMonth()+1);
 		itemView.setLayoutParams(params);
 		itemView.setPadding(2, 2, 2, 2);
 

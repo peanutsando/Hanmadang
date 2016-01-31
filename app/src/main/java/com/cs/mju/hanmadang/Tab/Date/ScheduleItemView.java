@@ -35,7 +35,7 @@ public class ScheduleItemView extends LinearLayout {
 
 		// Set Text 03
 		mText03 = (TextView) findViewById(R.id.dataItem03);
-		mText03.setText(aItem.getData(2));
+		mText03.setText(aItem.getData(3));
 	}
 
 	// set Text

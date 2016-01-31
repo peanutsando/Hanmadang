@@ -45,7 +45,7 @@
         android:layout_height="8px"
         android:layout_below="@id/textView1"
         android:background="#a9a9a9"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         />
 
     <RelativeLayout
