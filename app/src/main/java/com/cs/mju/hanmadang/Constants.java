@@ -52,6 +52,7 @@ public class Constants {
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
     public static String registerTokenKey = "";
     public static final String NEW_NOTICE = "새로운 공지사항이 있습니다.";
+    public static final String NEW_DATE = "새로운 일정이 추가되었습니다.";
 
     /* BackKeyHandler */
     public static final String BACK_BTN_CLICK = "\'뒤로\'버튼을 한번 더 누르시면 종료 됩니다.";
@@ -67,6 +68,11 @@ public class Constants {
     public static final String CLUB_AND = "#an0000";
     public static final String CLUB_COSCI = "#co0000";
     public static final String CLUB_OS = "#os0000";
+
+    /* Calendar */
+    public static final String YEAR = "년";
+    public static final String MONTH = "월";
+    public static final String DATE = "일";
 
     public static int num = 0;
     public static int check_tab = 0;

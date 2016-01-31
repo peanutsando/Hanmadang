@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.PushJsonParser;
 import com.cs.mju.hanmadang.R;
+import com.cs.mju.hanmadang.Tab.DateActivity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class AddSchedule extends ActionBarActivity implements View.OnClickListener {
@@ -141,7 +143,6 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
     public void onClick(View v) {
         if(v.getId() == R.id.cancelButton) {
             setResult(2, resultIntent);
-            finish();
         }else if(v.getId() == R.id.addButton) {
             Intent resultIntent = new Intent();
             setResult(1, resultIntent);
@@ -153,9 +154,9 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             }
             PushJsonParser pushJsonParser = new PushJsonParser();
             Constants.num = 2;
-            pushJsonParser.sendPushMessage(title);
-            finish();
+            pushJsonParser.sendPushMessage(timestamp + " " + Constants.NEW_DATE);
         }
+        finish();
     }
 
     private void writedTextSave() {

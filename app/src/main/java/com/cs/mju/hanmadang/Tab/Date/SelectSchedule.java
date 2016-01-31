@@ -190,7 +190,7 @@ public class SelectSchedule extends ActionBarActivity {
             timestamp = intent.getExtras().getString("timestamp");
             title = intent.getExtras().getString("title");
 
-            createListView(title, timestamp, writer);
+//            createListView(title, timestamp, writer);
             adapter.notifyDataSetChanged();
         } else if (resultCode == 2) {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();

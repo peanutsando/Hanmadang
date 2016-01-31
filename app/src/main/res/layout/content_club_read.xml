@@ -185,7 +185,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:layout_toRightOf="@id/okButton"
         android:layout_marginLeft="30dip"
         android:gravity="center_horizontal"
-        android:background="@drawable/delete_btn"
+        android:background="@drawable/schedule_del_btn"
         />
 
     <Button
@@ -195,7 +195,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:layout_toRightOf="@id/delButton"
         android:layout_marginLeft="30dip"
         android:gravity="center_horizontal"
-        android:background="@drawable/modify_btn"/>
+        android:background="@drawable/schedule_mod_btn"/>
 
 </RelativeLayout>
 </RelativeLayout>
