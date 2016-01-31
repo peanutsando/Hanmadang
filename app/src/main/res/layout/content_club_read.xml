@@ -189,7 +189,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:gravity="center_horizontal"
-        android:background="@drawable/delete_btn"
+        android:background="@drawable/schedule_del_btn"
         />
 
     <Button
@@ -201,7 +201,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:gravity="center_horizontal"
-        android:background="@drawable/modify_btn"/>
+        android:background="@drawable/schedule_mod_btn"/>
 
 </RelativeLayout>
 </RelativeLayout>

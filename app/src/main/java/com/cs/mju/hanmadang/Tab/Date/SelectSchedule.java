@@ -175,13 +175,22 @@ public class SelectSchedule extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
-//            super.onStart();
-//            Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
-//            intent.putExtra("selectedYear",  getIntent().getIntExtra("selectedYear", 0));
-//            intent.putExtra("selectedMonth",  getIntent().getIntExtra("selectedMonth", 0));
-//            intent.putExtra("selectedDay",  getIntent().getIntExtra("selectedDay", 0));
-//            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//            startActivity(intent);
+            super.onResume();
+            Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
+            intent.putExtra("selectedYear",  getIntent().getIntExtra("selectedYear", 0));
+            intent.putExtra("selectedMonth",  getIntent().getIntExtra("selectedMonth", 0));
+            intent.putExtra("selectedDay",  getIntent().getIntExtra("selectedDay", 0));
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            String writer;
+            String timestamp;
+            String title;
+
+            writer = intent.getExtras().getString("writer");
+            timestamp = intent.getExtras().getString("timestamp");
+            title = intent.getExtras().getString("title");
+
+//            createListView(title, timestamp, writer);
             adapter.notifyDataSetChanged();
         } else if (resultCode == 2) {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();

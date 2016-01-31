@@ -50,7 +50,7 @@ public class ScheduleItem {
    }
 
    // Compare with the input object
-   public int compareTo(ScheduleItem other) {
+   public int compareTo(ScheduleItem other)  {
        if (mData != null) {
            String[] otherData = other.getData();
            if (mData.length == otherData.length) {

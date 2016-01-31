@@ -200,7 +200,7 @@
             android:adjustViewBounds="true"
             android:layout_alignParentLeft="true"
             android:scaleType="fitXY"
-            android:background="@drawable/write_btn"
+            android:background="@drawable/schedule_write_btn"
             />
 
         <Button

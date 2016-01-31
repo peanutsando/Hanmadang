@@ -46,6 +46,7 @@ public class PushJsonParser {
     public void sendPushMessage(String title) {
         List<String> keyList = new ArrayList<String>();
         Sender sender = new Sender(Constants.GOOGLE_API_KEY);
+        Log.i(getClass().getSimpleName(), title);
         Message message = new Message.Builder().addData("message", title).build();
         getTokenKeyFromURL(Constants.REG_URL);
         MulticastResult result;

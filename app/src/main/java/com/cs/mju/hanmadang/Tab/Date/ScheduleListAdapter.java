@@ -77,7 +77,6 @@ public class ScheduleListAdapter extends BaseAdapter {
            itemView.setText(1, mItems.get(position).getData(1));
            // 리스트뷰의 날짜부분 끝에 0. 빼기
            String temp = mItems.get(position).getData(3).substring(0,16);
-           Log.e("temp ", temp);
            itemView.setText(2, temp);
 
            Button deleteButton = (Button) convertView.findViewById(R.id.deleteButton);
@@ -111,8 +110,6 @@ public class ScheduleListAdapter extends BaseAdapter {
                            }
                        }
                    }).start();
-
-//                finish();
                }
            });
        }

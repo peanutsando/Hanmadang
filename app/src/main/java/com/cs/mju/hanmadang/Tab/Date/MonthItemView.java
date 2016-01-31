@@ -106,14 +106,11 @@ public class MonthItemView extends TextView {
 				else
 					date = curYear + "-" + curMonth + "-" + day;
 			}
-			Log.e("date ", date);
 
 			for(int i=0; i<jsonParser.object.size(); i++) {
 				String[] str = jsonParser.object.get(i).getTimestamp().split(" ");
-				Log.e("jsonParser.object.get(i).getTitle()", jsonParser.object.get(i).getTimestamp());
 				if(str[0].equals(date)){
 					title = jsonParser.object.get(i).getTitle();
-					Log.e("일치 ", "일치!");
 					if(text==null){
 						text = title+"&*&";
 					}else{

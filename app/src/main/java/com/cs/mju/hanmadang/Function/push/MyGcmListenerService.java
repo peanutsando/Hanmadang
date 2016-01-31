@@ -55,7 +55,7 @@ public class MyGcmListenerService extends GcmListenerService {
          */
         if(message.equals(Constants.NEW_NOTICE)){
             Constants.num = 0;
-        }else if(message.contains("-")){
+        }else if(message.contains("-") || message.contains(Constants.NEW_DATE)){
             Constants.num = 2;
         }else{
             Constants.num = 1;
@@ -80,7 +80,6 @@ public class MyGcmListenerService extends GcmListenerService {
         String tab = "";
         Bundle args = new Bundle();
         int position;
-        Log.i("tab Send Noti", String.valueOf(Constants.num));
         switch (Constants.num) {
             case 0:
                 intent = new Intent(this, MainActivity.class);

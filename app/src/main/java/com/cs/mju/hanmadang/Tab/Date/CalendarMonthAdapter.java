@@ -166,7 +166,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
 		// create a params
 		GridView.LayoutParams params = new GridView.LayoutParams(
-				GridView.LayoutParams.MATCH_PARENT, 270);
+				GridView.LayoutParams.MATCH_PARENT, 200);
 
 		// calculate row and column
 		int rowIndex = position / countColumn;
