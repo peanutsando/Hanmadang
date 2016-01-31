@@ -16,14 +16,8 @@ import android.widget.Toast;
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Handler;
 
 /**
  * Created by Joguk_1 on 2016-01-13.

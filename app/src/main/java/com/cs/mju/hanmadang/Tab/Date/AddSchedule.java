@@ -95,7 +95,6 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         // 현재시간 버튼 추가 버튼으로 체인지
         if (getIntent().getStringExtra("title")!=null)
             currentTime.setText("일정 수정");
-
     }
 
     // 현재시간 텍스트뷰에 표시
