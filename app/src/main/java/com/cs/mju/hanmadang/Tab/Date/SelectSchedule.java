@@ -107,42 +107,6 @@ public class SelectSchedule extends ActionBarActivity {
                 startActivityForResult(intent, REQUEST_CODE_SELECTED);
             }
         });
-
-        // 지우기 버튼 이벤트 처리
-//        Log.d("deleteButton", deleteButton.toString());
-//        deleteButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            URL url = new URL(Constants.SCHEDULE_MOD_URL);
-//                            URLConnection conn = url.openConnection();
-//
-//                            conn.setDoOutput(true);
-//
-//                            /* 데이터 전송, &*&은 데이터를 구분할 토큰 */
-//                            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-//                            out.write(curData[0]);
-//                            out.write("&*&");
-//                            out.write(curData[1]);
-//                            out.write("&*&");
-//                            out.write(curData[2]);
-//                            out.write("&*&");
-//                            out.write(date);
-//
-//                            out.close();
-//
-//                            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//                        } catch (Exception e) {
-//                            Log.d("Exception", e.toString());
-//                        }
-//                    }
-//                }).start();
-//
-////                finish();
-//            }
-//        });
     }
 
     private void loadData() {
@@ -175,6 +139,7 @@ public class SelectSchedule extends ActionBarActivity {
                 timestamp = jsonParser.object.get(i).getTimestamp();
 
                 adapter.addItem(new ScheduleItem(title, place, content, timestamp));
+                adapter.notifyDataSetChanged();
             }
         }
     }
@@ -210,13 +175,14 @@ public class SelectSchedule extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
-            super.onStart();
-            Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
-            intent.putExtra("selectedYear",  getIntent().getIntExtra("selectedYear", 0));
-            intent.putExtra("selectedMonth",  getIntent().getIntExtra("selectedMonth", 0));
-            intent.putExtra("selectedDay",  getIntent().getIntExtra("selectedDay", 0));
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
+//            super.onStart();
+//            Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
+//            intent.putExtra("selectedYear",  getIntent().getIntExtra("selectedYear", 0));
+//            intent.putExtra("selectedMonth",  getIntent().getIntExtra("selectedMonth", 0));
+//            intent.putExtra("selectedDay",  getIntent().getIntExtra("selectedDay", 0));
+//            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            startActivity(intent);
+            adapter.notifyDataSetChanged();
         } else if (resultCode == 2) {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
         }

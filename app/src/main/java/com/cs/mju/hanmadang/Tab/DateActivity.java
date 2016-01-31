@@ -143,12 +143,14 @@ public class DateActivity extends AppCompatActivity {
         if(resultCode == 1){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             Constants.num = 2;
+            monthViewAdapter.notifyDataSetInvalidated();
+            monthViewAdapter.notifyDataSetChanged();
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }else if(resultCode == 2){
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
             initDate();
         }else if(resultCode == 3){
-            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
         }
     }
 

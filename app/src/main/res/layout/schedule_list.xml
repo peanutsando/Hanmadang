@@ -47,13 +47,12 @@
 			/>
 		<Button
 			android:id="@+id/deleteButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="55dip"
+			android:layout_height="30dip"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/dataItem03"
 			android:focusable="false"
-			android:text="삭제"
+			android:background="@drawable/schedule_del_btn"
 			/>
 	</RelativeLayout>
-
-</LinearLayout>  
+</LinearLayout>

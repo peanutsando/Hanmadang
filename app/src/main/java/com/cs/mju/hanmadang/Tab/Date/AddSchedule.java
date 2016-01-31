@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 import com.cs.mju.hanmadang.Constants;
+import com.cs.mju.hanmadang.Function.PushJsonParser;
 import com.cs.mju.hanmadang.R;
 
 import java.io.BufferedReader;
@@ -89,9 +90,9 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         }
         // 추가 버튼 수정 버튼으로 체인지
         if (getIntent().getStringExtra("title")!=null)
-            addButton.setText("수정");
+            addButton.setBackgroundResource(R.drawable.schedule_mod_btn);
         else
-            addButton.setText("추가");
+            addButton.setBackgroundResource(R.drawable.write_btn);
         // 현재시간 버튼 추가 버튼으로 체인지
         if (getIntent().getStringExtra("title")!=null)
             currentTime.setText("일정 수정");
@@ -145,11 +146,17 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             Intent resultIntent = new Intent();
             setResult(1, resultIntent);
             writedTextSave();
+            Log.e("title", title);
+            Log.e("content", content);
+            Log.e("place", place);
             if(getIntent().getStringExtra("title")!=null){
                 updateData();
             }else{
                 saveData();
             }
+            PushJsonParser pushJsonParser = new PushJsonParser();
+            Constants.num = 2;
+            pushJsonParser.sendPushMessage(title);
             finish();
         }
     }
@@ -160,12 +167,12 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         }else{
             title = tempTitle.getText().toString();
         }
-        if(tempTitle.length()==0){
+        if(tempPlace.length()==0){
             place = "내용없음";
         }else{
             place = tempPlace.getText().toString();
         }
-        if(tempTitle.length()==0){
+        if(tempContent.length()==0){
             content = "내용없음";
         }else{
             content = tempContent.getText().toString();

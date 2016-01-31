@@ -45,8 +45,7 @@
 			android:layout_below="@+id/editTitle"
 			android:hint="장소"
 			android:cursorVisible="true"
-
-			  />
+			/>
 
 		<EditText
 			android:id="@+id/editContent"
@@ -64,20 +63,21 @@
 			android:calendarViewShown="false"
 			android:layout_below="@id/editContent"
 			android:layout_width="wrap_content"
-			android:layout_height="0dp" />
+			android:layout_height="0dp"
+			/>
 
 		<Button
 			android:id="@+id/addButton"
 			android:layout_width="80dp"
 			android:layout_height="40dp"
 			android:layout_below="@id/editContent"
-			android:layout_marginLeft="50dp"
-			android:layout_marginRight="10dp"
 			android:layout_marginTop="16dp"
 			android:gravity="center"
 			android:adjustViewBounds="true"
 			android:scaleType="fitStart"
-			android:background="@drawable/large_check"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="35dip"
+			android:background="@drawable/schedule_write_btn"
 			/>
 
 		<Button
@@ -85,13 +85,14 @@
 			android:layout_width="80dp"
 			android:layout_height="40dp"
 			android:layout_below="@id/editContent"
-			android:layout_toRightOf="@id/addButton"
-			android:layout_marginLeft="60dp"
+			android:layout_marginRight="35dip"
 			android:layout_marginTop="16dp"
 			android:adjustViewBounds="true"
+			android:layout_alignParentRight="true"
 			android:scaleType="fitStart"
 			android:gravity="center"
-			android:background="@drawable/cancel_button"/>
+			android:background="@drawable/schedule_cancel_btn"
+			/>
 
 	</RelativeLayout>
 </ScrollView>
