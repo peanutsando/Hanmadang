@@ -52,7 +52,7 @@ public class CalendarMonthView extends GridView {
 		this.selectionListener = listener;
 	}
 	// 리스너 객체 리턴
-	public OnDataSelectionListener getOnDataSelectionListener() {
+	public OnDataSelectionListener getOnDataSelectionListener()  {
 		return selectionListener;
 	}
 

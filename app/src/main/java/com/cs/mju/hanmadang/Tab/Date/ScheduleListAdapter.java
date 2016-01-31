@@ -111,8 +111,6 @@ public class ScheduleListAdapter extends BaseAdapter {
                            }
                        }
                    }).start();
-
-//                finish();
                }
            });
        }

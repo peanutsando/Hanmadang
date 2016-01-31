@@ -94,7 +94,7 @@ public class DateTimePicker extends LinearLayout {
 		timePicker.setCurrentMinute(currentMinute);
 	}
 
-	public void updateDate(int year, int monthOfYear, int dayOfMonth){
+	public void updateDate(int year, int monthOfYear, int dayOfMonth) {
 		datePicker.updateDate(year, monthOfYear, dayOfMonth);
 	}
 

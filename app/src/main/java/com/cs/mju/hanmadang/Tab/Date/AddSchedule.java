@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
 
 public class AddSchedule extends ActionBarActivity implements View.OnClickListener {
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
-    TextView currentTime;
+    TextView currentTime, titleBar;
     DateTimePicker dateTimePicker;
     private Button addButton, cancelButton;
     // 텍스트 값
@@ -74,6 +74,7 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
     }
 
     private void initViews() {
+        titleBar = (TextView)findViewById(R.id.titleBar);
         currentTime = (TextView)findViewById(R.id.currentTime);
         dateTimePicker = (DateTimePicker)findViewById(R.id.dateTimePicker);
         tempTitle = (EditText)findViewById(R.id.editTitle);
@@ -92,11 +93,10 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         if (getIntent().getStringExtra("title")!=null)
             addButton.setBackgroundResource(R.drawable.schedule_mod_btn);
         else
-            addButton.setBackgroundResource(R.drawable.write_btn);
-        // 현재시간 버튼 추가 버튼으로 체인지
+            addButton.setBackgroundResource(R.drawable.schedule_write_btn);
+        // 일정 추가 버튼 추가 버튼으로 체인지
         if (getIntent().getStringExtra("title")!=null)
-            currentTime.setText("일정 수정");
-
+            titleBar.setText("일정 수정");
     }
 
     // 현재시간 텍스트뷰에 표시
@@ -146,9 +146,6 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             Intent resultIntent = new Intent();
             setResult(1, resultIntent);
             writedTextSave();
-            Log.e("title", title);
-            Log.e("content", content);
-            Log.e("place", place);
             if(getIntent().getStringExtra("title")!=null){
                 updateData();
             }else{
@@ -202,7 +199,6 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
                     out.close();
 
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    Log.e("저장가자!", "저장가자!");
                 }catch(Exception e) {
                     Log.d("Exception", e.toString());
                 }

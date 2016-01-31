@@ -11,10 +11,8 @@ import com.cs.mju.hanmadang.R;
 public class ScheduleItemView extends LinearLayout {
 	// TextView 01
 	private TextView mText01;
-
 	// TextView 02
 	private TextView mText02;
-
 	// TextView 03
 	private TextView mText03;
 
