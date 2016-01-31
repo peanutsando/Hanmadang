@@ -115,6 +115,7 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             String minute = tokens.nextToken(":");
             Calendar calendar = Calendar.getInstance();
             calendar.set(Integer.parseInt(year), Integer.parseInt(month)-1, Integer.parseInt(temp[1]), Integer.parseInt(temp2[1]), Integer.parseInt(minute));
+            Log.e("TEst", year + " " + month + " " + date);
             currentTime.setText(dateFormat.format(calendar.getTime()));
         }else{ // 그냥  추가일 경우 현재 시간
             Calendar calendar = Calendar.getInstance();
