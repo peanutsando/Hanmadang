@@ -51,6 +51,7 @@ public class PushJsonParser {
         MulticastResult result;
         int size = object.size();
         int i = 0, j = 0;
+        Log.i("tab", String.valueOf(Constants.num));
         if (Constants.num != 0) {
             while (i != size) {
                 if (!(object.get(i).getReg_key().equals(Constants.registerTokenKey))) {
@@ -69,9 +70,9 @@ public class PushJsonParser {
             result = sender.send(message, keyList, 1);
             if (result != null) {
                 List<Result> results = result.getResults();
-                for (Result result0 : results) {
+                /*for (Result result0 : results) {
                     Log.e("###", result0.getMessageId());
-                }
+                }*/
             }
         } catch (Exception e) {
             e.printStackTrace();

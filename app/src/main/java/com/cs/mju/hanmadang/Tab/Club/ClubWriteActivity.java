@@ -136,6 +136,8 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
             sendDataToClubActivity();
             /* 서버에 데이터 전송하고 종료 */
             PushJsonParser jsonParser = new PushJsonParser();
+            Constants.num = 1;
+            Log.i("tab", String.valueOf(Constants.num) + " " + title);
             jsonParser.sendPushMessage(title);
             this.finish();
         } else if (v.getId() == R.id.inputWriter) {
@@ -286,6 +288,7 @@ public class ClubWriteActivity extends AppCompatActivity implements View.OnClick
         extra.putString("timestamp", strCurDate);
         extra.putString("title", title);
         intent.putExtras(extra);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         this.setResult(RESULT_OK, intent);
 
         if (inputContent.getText().toString().length() == 0)
