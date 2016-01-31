@@ -15,17 +15,17 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:padding="10dp">
+    android:padding="10dip">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingLeft="4dp"
+        android:paddingTop="4dip"
+        android:paddingLeft="4dip"
         android:text="제목 "
         android:textColor="#ff222222"
-        android:textSize="18dp"
+        android:textSize="18dip"
         />
 
     <TextView
@@ -34,7 +34,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/title"
         android:layout_alignBaseline="@id/title"
-        android:layout_marginLeft="7dp"
+        android:layout_marginLeft="7dip"
         android:singleLine="true"
         />
 </RelativeLayout>
@@ -45,7 +45,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_height="1px"
     android:layout_below="@id/titleLayout"
     android:background="#a9a9a9"
-    android:layout_marginTop="3dp"
+    android:layout_marginTop="3dip"
     />
 
 // 작성자
@@ -54,16 +54,16 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/write_borderLine"
-    android:padding="10dp">
+    android:padding="10dip">
     <TextView
         android:id="@+id/writer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingLeft="4dp"
+        android:paddingTop="4dip"
+        android:paddingLeft="4dip"
         android:text="작성자 "
         android:textColor="#ff222222"
-        android:textSize="18dp"
+        android:textSize="18dip"
         />
 
     <TextView
@@ -72,7 +72,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/writer"
         android:layout_alignBaseline="@id/writer"
-        android:layout_marginLeft="7dp"
+        android:layout_marginLeft="7dip"
         />
 </RelativeLayout>
 
@@ -82,7 +82,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_height="1px"
     android:layout_below="@id/writerLayout"
     android:background="#a9a9a9"
-    android:layout_marginTop="3dp"
+    android:layout_marginTop="3dip"
     />
 
 // 본문
@@ -91,14 +91,14 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/writerLayout"
-    android:padding="10dp">
+    android:padding="10dip">
 
     <EditText
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/content"
-        android:layout_marginLeft="7dp"
+        android:layout_marginLeft="7dip"
         android:lines="10" android:gravity="top|left" android:inputType="textMultiLine"
         android:scrollHorizontally="false"
         android:minWidth="10.0dip"
@@ -113,7 +113,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_height="1px"
     android:layout_below="@id/contentLayout"
     android:background="#a9a9a9"
-    android:layout_marginTop="3dp"
+    android:layout_marginTop="3dip"
     />
 
 // 키 필드
@@ -122,17 +122,17 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/contentLayout"
-    android:layout_marginTop="15dp"
-    android:padding="10dp">
+    android:layout_marginTop="15dip"
+    android:padding="10dip">
     <TextView
         android:id="@+id/key"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingLeft="4dp"
+        android:paddingTop="4dip"
+        android:paddingLeft="4dip"
         android:text="키 입력 "
         android:textColor="#ff222222"
-        android:textSize="18dp"
+        android:textSize="18dip"
         />
 
     <EditText
@@ -140,7 +140,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/key"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10dip"
         android:ems="10"
         android:hint=" 키를 입력하세요"
         android:inputType="textMultiLine" />
@@ -148,9 +148,9 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     <Button
         android:id="@+id/keyButton"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="30dip"
         android:layout_toRightOf="@id/inputKey"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="5dip"
         android:layout_alignBaseline="@id/inputKey"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
@@ -164,14 +164,14 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
     android:layout_height="wrap_content"
     android:layout_below="@id/keyLayout"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="20dip"
     android:gravity="center_horizontal"
-    android:padding="10dp">
+    android:padding="10dip">
 
     <Button
         android:id="@+id/okButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
         android:gravity="center_horizontal"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
@@ -180,20 +180,20 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
 
     <Button
         android:id="@+id/delButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
         android:layout_toRightOf="@id/okButton"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="30dip"
         android:gravity="center_horizontal"
         android:background="@drawable/delete_btn"
         />
 
     <Button
         android:id="@+id/modifyButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
         android:layout_toRightOf="@id/delButton"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="30dip"
         android:gravity="center_horizontal"
         android:background="@drawable/modify_btn"/>
 
