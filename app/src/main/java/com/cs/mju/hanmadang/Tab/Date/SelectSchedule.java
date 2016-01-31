@@ -1,7 +1,6 @@
 package com.cs.mju.hanmadang.Tab.Date;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -16,8 +15,6 @@ import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
-import com.cs.mju.hanmadang.Tab.Club.JSONParser;
-import com.cs.mju.hanmadang.Tab.Club.WriteItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

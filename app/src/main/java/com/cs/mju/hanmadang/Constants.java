@@ -67,4 +67,6 @@ public class Constants {
 
     public static int num = 0;
     public static int write = 0;
+
+    public static final long CHECK_TIMER = 1800000;
 }

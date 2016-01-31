@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
-import com.google.android.gcm.server.Sender;
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;

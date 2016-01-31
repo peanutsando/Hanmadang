@@ -15,7 +15,6 @@ import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Tab.Club.ClubReadActivity;
 import com.cs.mju.hanmadang.Tab.Club.JSONParser;
-import com.cs.mju.hanmadang.Tab.ClubActivity;
 import com.cs.mju.hanmadang.Tab.DateActivity;
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -74,12 +73,15 @@ public class MyGcmListenerService extends GcmListenerService {
         Bundle args = new Bundle();
         int position;
         switch (Constants.num) {
+            case 0:
+                intent = new Intent(this, MainActivity.class);
+                break;
             case 1:
                 intent = new Intent(this, ClubReadActivity.class);
                 jsonParser.parseJSONFromURL(Constants.CLUB_URL);
                 position = (jsonParser.object.size() - 1);
                 args.putInt("pos", position);
-                tab += " : " + getString(R.string.club) + " " + getString(R.string.alarm);
+                tab = " : " + getString(R.string.club) + " " + getString(R.string.alarm);
                 intent.putExtras(args);
                 break;
             case 2:

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.widget.TabHost;
 
-import com.cs.mju.hanmadang.Function.push.RegistrationIntentService;
 import com.cs.mju.hanmadang.Tab.ClubActivity;
 import com.cs.mju.hanmadang.Tab.DateActivity;
 import com.cs.mju.hanmadang.Tab.NoticeActivity;
