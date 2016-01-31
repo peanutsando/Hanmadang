@@ -75,6 +75,7 @@ public class MyGcmListenerService extends GcmListenerService {
         switch (Constants.num) {
             case 0:
                 intent = new Intent(this, MainActivity.class);
+                tab = " : " + getString(R.string.notice) + " " + getString(R.string.alarm);
                 break;
             case 1:
                 intent = new Intent(this, ClubReadActivity.class);
@@ -86,6 +87,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 break;
             case 2:
                 intent = new Intent(this, DateActivity.class);
+                tab = " : " + getString(R.string.date) + " " + getString(R.string.alarm);
                 break;
             default:
         }

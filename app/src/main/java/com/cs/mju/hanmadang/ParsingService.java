@@ -63,7 +63,7 @@ public class ParsingService extends Service {
                             edit.commit();
                             count = preferences.getString("NoticeNumber", noticeNumber);
                             PushJsonParser jsonParser = new PushJsonParser();
-                            Constants.check_tab = 0;
+                            Constants.num = 0;
                             jsonParser.sendPushMessage(Constants.NEW_NOTICE);
                         }
                         break;

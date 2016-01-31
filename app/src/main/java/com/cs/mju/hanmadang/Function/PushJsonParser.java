@@ -51,7 +51,7 @@ public class PushJsonParser {
         MulticastResult result;
         int size = object.size();
         int i = 0, j = 0;
-        if (Constants.check_tab != 0) {
+        if (Constants.num != 0) {
             while (i != size) {
                 if (!(object.get(i).getReg_key().equals(Constants.registerTokenKey))) {
                     keyList.add(j, object.get(i).getReg_key());

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 import com.cs.mju.hanmadang.Constants;
+import com.cs.mju.hanmadang.Function.PushJsonParser;
 import com.cs.mju.hanmadang.R;
 
 import java.io.BufferedReader;
@@ -150,6 +151,9 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
             }else{
                 saveData();
             }
+            PushJsonParser pushJsonParser = new PushJsonParser();
+            Constants.num = 2;
+            pushJsonParser.sendPushMessage(title);
             finish();
         }
     }
