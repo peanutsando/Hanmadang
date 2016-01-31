@@ -39,6 +39,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
+        Log.i("tab receive", String.valueOf(Constants.num));
         if (from.startsWith("/topics/")) {
             // message received from some topic.
         } else {
@@ -52,6 +53,13 @@ public class MyGcmListenerService extends GcmListenerService {
          *     - Store message in local database.
          *     - Update UI.
          */
+        if(message.equals(Constants.NEW_NOTICE)){
+            Constants.num = 0;
+        }else if(message.contains("-")){
+            Constants.num = 2;
+        }else{
+            Constants.num = 1;
+        }
 
         /**
          * In some cases it may be useful to show a notification indicating to the user
@@ -72,23 +80,30 @@ public class MyGcmListenerService extends GcmListenerService {
         String tab = "";
         Bundle args = new Bundle();
         int position;
+        Log.i("tab Send Noti", String.valueOf(Constants.num));
         switch (Constants.num) {
             case 0:
                 intent = new Intent(this, MainActivity.class);
+                args.putInt("position", 0);
+                tab = " : " + getString(R.string.notice) + " " + getString(R.string.alarm);
                 break;
             case 1:
                 intent = new Intent(this, ClubReadActivity.class);
                 jsonParser.parseJSONFromURL(Constants.CLUB_URL);
                 position = (jsonParser.object.size() - 1);
                 args.putInt("pos", position);
+                args.putInt("position", 1);
                 tab = " : " + getString(R.string.club) + " " + getString(R.string.alarm);
-                intent.putExtras(args);
                 break;
             case 2:
                 intent = new Intent(this, DateActivity.class);
+                args.putInt("position", 2);
+                tab = " : " + getString(R.string.date) + " " + getString(R.string.alarm);
                 break;
             default:
         }
+        intent.putExtras(args);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

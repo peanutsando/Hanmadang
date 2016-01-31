@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="쓰기"
-        android:textSize="16dp"
+        android:textSize="16dip"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="5dip"
         />
 
     // 경계선
@@ -28,7 +28,7 @@
         android:layout_height="1px"
         android:layout_below="@id/showCategory"
         android:background="#a9a9a9"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="3dip"
         />
 
     // 제목
@@ -37,16 +37,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/write_borderLine"
-        android:padding="10dp">
+        android:padding="10dip">
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:paddingLeft="4dp"
+            android:paddingTop="4dip"
+            android:paddingLeft="4dip"
             android:text="제목 "
             android:textColor="#ff222222"
-            android:textSize="18dp"
+            android:textSize="18dip"
             android:drawableRight="@drawable/check"
             />
 
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/title"
             android:layout_alignBaseline="@id/title"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="7dip"
             android:singleLine="true"
             android:background="@null"
             />
@@ -68,7 +68,7 @@
         android:layout_height="1px"
         android:layout_below="@id/titleLayout"
         android:background="#a9a9a9"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="3dip"
         />
 
     // 작성자
@@ -77,16 +77,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/write_borderLine2"
-        android:padding="10dp">
+        android:padding="10dip">
         <TextView
             android:id="@+id/writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:paddingLeft="4dp"
+            android:paddingTop="4dip"
+            android:paddingLeft="4dip"
             android:text="작성자 "
             android:textColor="#ff222222"
-            android:textSize="18dp"
+            android:textSize="18dip"
             android:drawableRight="@drawable/check"
             />
 
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/writer"
             android:layout_alignBaseline="@id/writer"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="7dip"
             android:hint="  눌러서 선택해주세요."
             />
     </RelativeLayout>
@@ -107,7 +107,7 @@
         android:layout_height="1px"
         android:layout_below="@id/writerLayout"
         android:background="#a9a9a9"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="3dip"
         />
 
     <RelativeLayout
@@ -115,14 +115,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/writerLayout"
-        android:padding="10dp">
+        android:padding="10dip">
 
         <EditText
             android:id="@+id/inputContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/content"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="7dip"
             android:lines="10" android:gravity="top|left" android:inputType="textMultiLine"
             android:scrollHorizontally="false"
             android:minWidth="10.0dip"
@@ -138,7 +138,7 @@
         android:layout_height="1px"
         android:layout_below="@id/contentLayout"
         android:background="#a9a9a9"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="3dip"
         />
 
     // 키
@@ -147,17 +147,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/contentLayout"
-        android:layout_marginTop="15dp"
-        android:padding="10dp">
+        android:layout_marginTop="15dip"
+        android:padding="10dip">
         <TextView
             android:id="@+id/key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:paddingLeft="4dp"
+            android:paddingTop="4dip"
+            android:paddingLeft="4dip"
             android:text="키 입력 "
             android:textColor="#ff222222"
-            android:textSize="18dp"
+            android:textSize="18dip"
             />
 
         <EditText
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/key"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="10dip"
             android:ems="10"
             android:hint=" 키를 입력하세요"
             android:inputType="textMultiLine" />
@@ -173,9 +173,9 @@
         <Button
             android:id="@+id/keyButton"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="30dip"
             android:layout_toRightOf="@id/inputKey"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="5dip"
             android:layout_alignBaseline="@id/inputKey"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -189,15 +189,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/keyLayout"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="35dp"
-        android:padding="10dp">
+        android:layout_marginTop="10dip"
+        android:layout_marginRight="35dip"
+        android:padding="10dip">
 
         <Button
             android:id="@+id/writeButton"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="60dp"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_marginLeft="60dip"
             android:gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -205,10 +205,10 @@
             />
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
             android:layout_toRightOf="@id/writeButton"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="70dip"
             android:gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
