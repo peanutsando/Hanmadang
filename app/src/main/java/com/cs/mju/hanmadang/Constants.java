@@ -69,15 +69,11 @@ public class Constants {
     public static final String CLUB_COSCI = "#co0000";
     public static final String CLUB_OS = "#os0000";
 
-    /* Calendar */
-    public static final String YEAR = "년";
-    public static final String MONTH = "월";
-    public static final String DATE = "일";
-
     public static int num = 0;
     public static int check_tab = 0;
     public static int write = 0;
 
 //    public static final long CHECK_TIMER = 3000;
     public static final long CHECK_TIMER = 1800000;
+    public static final long HOURS24 = 24 * 60 * 60 * 1000;
 }

@@ -15,6 +15,7 @@ import com.cs.mju.hanmadang.MainActivity;
 import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Tab.Club.ClubReadActivity;
 import com.cs.mju.hanmadang.Tab.Club.JSONParser;
+import com.cs.mju.hanmadang.Tab.Date.SelectSchedule;
 import com.cs.mju.hanmadang.Tab.DateActivity;
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -25,6 +26,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
     private JSONParser jsonParser = new JSONParser();
+
     /**
      * Called when message is received.
      *
@@ -53,13 +55,7 @@ public class MyGcmListenerService extends GcmListenerService {
          *     - Store message in local database.
          *     - Update UI.
          */
-        if(message.equals(Constants.NEW_NOTICE)){
-            Constants.num = 0;
-        }else if(message.contains("-") || message.contains(Constants.NEW_DATE)){
-            Constants.num = 2;
-        }else{
-            Constants.num = 1;
-        }
+        Constants.num = checkTab(message);
 
         /**
          * In some cases it may be useful to show a notification indicating to the user
@@ -78,9 +74,10 @@ public class MyGcmListenerService extends GcmListenerService {
     private void sendNotification(String message) {
         Intent intent = new Intent();
         String tab = "";
+        String[] sp, to;
         Bundle args = new Bundle();
         int position;
-        switch (Constants.num) {
+        switch (checkTab(message)) {
             case 0:
                 intent = new Intent(this, MainActivity.class);
                 args.putInt("position", 0);
@@ -95,7 +92,12 @@ public class MyGcmListenerService extends GcmListenerService {
                 tab = " : " + getString(R.string.club) + " " + getString(R.string.alarm);
                 break;
             case 2:
-                intent = new Intent(this, DateActivity.class);
+                intent = new Intent(this, SelectSchedule.class);
+                sp = message.split(" ");
+                to = sp[0].split("-");
+                intent.putExtra("selectedYear", Integer.parseInt(to[0]));
+                intent.putExtra("selectedMonth", Integer.parseInt(to[1])-1);
+                intent.putExtra("selectedDay", Integer.parseInt(to[2]));
                 args.putInt("position", 2);
                 tab = " : " + getString(R.string.date) + " " + getString(R.string.alarm);
                 break;
@@ -122,5 +124,13 @@ public class MyGcmListenerService extends GcmListenerService {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
-
+    private int checkTab(String message) {
+        if (message.equals(Constants.NEW_NOTICE)) {
+            return 0;
+        } else if (message.contains("-") || message.contains(Constants.NEW_DATE)) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
 }

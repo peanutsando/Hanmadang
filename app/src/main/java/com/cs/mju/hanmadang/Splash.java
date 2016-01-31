@@ -31,6 +31,7 @@ public class Splash extends Activity {
                 Intent i = new Intent(Splash.this, MainActivity.class);
                 Intent intent = new Intent(Splash.this, ParsingService.class);
                 startService(intent);
+
                 startActivity(i);
                 // close this activity
                 finish();

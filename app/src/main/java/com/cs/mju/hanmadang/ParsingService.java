@@ -93,6 +93,6 @@ public class ParsingService extends Service {
         PendingIntent sender = PendingIntent.getService(context, 1234, intent, 0);
 
         alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + second, sender);
-
     }
+
 }
