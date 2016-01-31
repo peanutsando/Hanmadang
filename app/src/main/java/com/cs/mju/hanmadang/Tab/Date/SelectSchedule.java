@@ -3,6 +3,7 @@ package com.cs.mju.hanmadang.Tab.Date;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +16,14 @@ import android.widget.Toast;
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-//import android.support.v4.view.ViewPager;
+import java.util.logging.Handler;
 
 /**
  * Created by Joguk_1 on 2016-01-13.
@@ -42,13 +47,26 @@ public class SelectSchedule extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_select);
 
+        Log.e("delete entry", getIntent().getExtras().getString("detele", "nothing"));
+        if(getIntent().getStringExtra("delete")=="delete"){
+            Log.e("delete ok", "delete ok");
+            adapter.notifyDataSetChanged();
+            Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
+            intent.putExtra("selectedYear", getIntent().getIntExtra("selectedYear", 0));
+            intent.putExtra("selectedMonth", getIntent().getIntExtra("selectedMonth", 0));
+            intent.putExtra("selectedDay", getIntent().getIntExtra("selectedDay", 0));
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+
         // 리스트뷰 객체 참조
         listView1 = (ListView) findViewById(R.id.listView1);
         // 텍스트뷰 객체 참조
         textView1 = (TextView) findViewById(R.id.textView1);
         backButton = (Button) findViewById(R.id.backButton);
         writeButton = (Button) findViewById(R.id.writeButton);
-        deleteButton = (Button) findViewById(R.id.deleteButton);
+//        deleteButton = (Button) findViewById(R.id.deleteButton);
 
         jsonParser = new ScheduleJSONParser();
 
@@ -80,6 +98,7 @@ public class SelectSchedule extends ActionBarActivity {
                 intent.putExtra("place", curData[1]);
                 intent.putExtra("content", curData[2]);
                 intent.putExtra("timestamp", curData[3]);
+                intent.putExtra("position", position);
 
                 startActivityForResult(intent, REQUEST_CODE_MODIFIED);
             }
@@ -105,6 +124,7 @@ public class SelectSchedule extends ActionBarActivity {
             }
         });
     }
+
 
     private void loadData() {
         jsonParser.parseJSONFromURL(Constants.SCHEDULE_URL);
@@ -136,7 +156,6 @@ public class SelectSchedule extends ActionBarActivity {
                 timestamp = jsonParser.object.get(i).getTimestamp();
 
                 adapter.addItem(new ScheduleItem(title, place, content, timestamp));
-                adapter.notifyDataSetChanged();
             }
         }
     }
@@ -165,36 +184,48 @@ public class SelectSchedule extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
             super.onResume();
             Intent intent = new Intent(getApplicationContext(), SelectSchedule.class);
-            intent.putExtra("selectedYear",  getIntent().getIntExtra("selectedYear", 0));
-            intent.putExtra("selectedMonth",  getIntent().getIntExtra("selectedMonth", 0));
-            intent.putExtra("selectedDay",  getIntent().getIntExtra("selectedDay", 0));
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            String writer;
-            String timestamp;
-            String title;
+            intent.putExtra("selectedYear", getIntent().getIntExtra("selectedYear", 0));
+            intent.putExtra("selectedMonth", getIntent().getIntExtra("selectedMonth", 0));
+            intent.putExtra("selectedDay", getIntent().getIntExtra("selectedDay", 0));
 
-            writer = intent.getExtras().getString("writer");
-            timestamp = intent.getExtras().getString("timestamp");
-            title = intent.getExtras().getString("title");
+            String title = data.getStringExtra("title");
+            String place = data.getStringExtra("place");
+            String content = data.getStringExtra("content");
+            String timestamp = data.getStringExtra("timestamp");
+            int position = data.getIntExtra("position", 002);
 
-//            createListView(title, timestamp, writer);
-            adapter.notifyDataSetChanged();
-
-            intent = getIntent();
-            finish();
-            startActivity(intent);
+            if(position != 002){
+                adapter.deleteItem(position);
+                createListView(title, place, content, timestamp);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }else {
+                createListView(title, place, content, timestamp);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
         } else if (resultCode == 2) {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void createListView(String title, String place, String content, String timestamp){
+        String date;
+        // 아이템 등록
+        if(title == null) {
+            Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_LONG).show();
+        }else {
+            // 10월 전이면 월 앞에 0을 붙이는 작업 , 10일 전일 경우 0을 붙이는 작업
+            adapter.addItem(new ScheduleItem(title, place, content, timestamp));
+            adapter.notifyDataSetChanged();
         }
     }
 }

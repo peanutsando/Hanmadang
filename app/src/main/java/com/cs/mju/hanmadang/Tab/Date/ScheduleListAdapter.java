@@ -1,12 +1,14 @@
 package com.cs.mju.hanmadang.Tab.Date;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.R;
@@ -21,8 +23,9 @@ import java.util.List;
 
 // 어댑터 클래스 정의
 public class ScheduleListAdapter extends BaseAdapter {
+    private Button deleteButton;
 
-   private Context mContext;
+    private Context mContext;
 
    private List<ScheduleItem> mItems = new ArrayList<ScheduleItem>();
 
@@ -30,9 +33,10 @@ public class ScheduleListAdapter extends BaseAdapter {
        mContext = context;
    }
 
-   public void addItem(ScheduleItem it) {
-       mItems.add(it);
-   }
+   public void addItem(ScheduleItem it) { mItems.add(it); }
+   public void deleteItem(int position) {
+        mItems.remove(position);
+    }
 
    public void setListItems(List<ScheduleItem> lit) {
        mItems = lit;
@@ -79,7 +83,7 @@ public class ScheduleListAdapter extends BaseAdapter {
            String temp = mItems.get(position).getData(3).substring(0,16);
            itemView.setText(2, temp);
 
-           Button deleteButton = (Button) convertView.findViewById(R.id.deleteButton);
+           deleteButton = (Button) convertView.findViewById(R.id.deleteButton);
            deleteButton.setOnClickListener(new Button.OnClickListener() {
                public void onClick(View v) {
                    new Thread(new Runnable() {
@@ -105,14 +109,25 @@ public class ScheduleListAdapter extends BaseAdapter {
                                out.close();
 
                                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                               startIntent(context);
                            } catch (Exception e) {
                                Log.d("Exception", e.toString());
                            }
                        }
                    }).start();
+                   startIntent(context);
                }
            });
        }
        return itemView;
    }
+
+    public void startIntent(Context context){
+        Intent i = new Intent(context, SelectSchedule.class);
+        i.putExtra("delete", "delete");
+        i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        context.startActivity(i);
+    }
 }
