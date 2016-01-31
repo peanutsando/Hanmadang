@@ -119,10 +119,12 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
 // 키 필드
 <RelativeLayout
     android:id="@+id/keyLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/contentLayout"
     android:layout_marginTop="15dip"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:padding="10dip">
     <TextView
         android:id="@+id/key"
@@ -160,7 +162,7 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
 
 <RelativeLayout
     android:id="@+id/buttonLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/keyLayout"
     android:layout_centerHorizontal="true"
@@ -170,30 +172,34 @@ tools:context="com.cs.mju.hanmadang.Tab.Club.ClubReadActivity">
 
     <Button
         android:id="@+id/okButton"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:background="@drawable/small_check"
         />
 
     <Button
         android:id="@+id/delButton"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/okButton"
         android:layout_marginLeft="30dip"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:gravity="center_horizontal"
         android:background="@drawable/schedule_del_btn"
         />
 
     <Button
         android:id="@+id/modifyButton"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_toRightOf="@id/delButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="30dip"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:gravity="center_horizontal"
         android:background="@drawable/schedule_mod_btn"/>
 
