@@ -123,7 +123,7 @@ public class ScheduleListAdapter extends BaseAdapter {
        return itemView;
    }
 
-    public void startIntent(Context context){
+    public void startIntent(Context context) {
         Intent i = new Intent(context, SelectSchedule.class);
         i.putExtra("delete", "delete");
         i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

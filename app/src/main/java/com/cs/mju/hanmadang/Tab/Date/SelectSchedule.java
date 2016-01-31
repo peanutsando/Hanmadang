@@ -202,7 +202,7 @@ public class SelectSchedule extends ActionBarActivity {
             String timestamp = data.getStringExtra("timestamp");
             int position = data.getIntExtra("position", 002);
 
-            if(position != 002){
+            if(position != 002) {
                 adapter.deleteItem(position);
                 createListView(title, place, content, timestamp);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

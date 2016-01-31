@@ -38,7 +38,7 @@ public class ScheduleItemView extends LinearLayout {
 
 	// set Text
 	public void setText(int index, String data) {
-		if (index == 0) {
+		if (index == 0)  {
 			mText01.setText(data);
 		} else if (index == 1) {
 			mText02.setText(data);

@@ -211,7 +211,7 @@ public class AddSchedule extends ActionBarActivity implements View.OnClickListen
         this.finish();
     }
 
-    private void updateData() {
+    private void updateData()  {
         new Thread(new Runnable() {
             @Override
             public void run() {
