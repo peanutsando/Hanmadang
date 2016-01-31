@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cs.mju.hanmadang.Constants;
 import com.cs.mju.hanmadang.Function.BackKeyHandler;
 import com.cs.mju.hanmadang.R;
 import com.cs.mju.hanmadang.Tab.Date.AddSchedule;
@@ -43,6 +44,8 @@ public class DateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_date);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Constants.check_tab = 1;
         keyHandler = new BackKeyHandler(this);
 
         initDate();

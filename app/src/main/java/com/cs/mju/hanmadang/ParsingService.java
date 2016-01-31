@@ -65,7 +65,7 @@ public class ParsingService extends Service {
                             edit.putString("NoticeNumber", noticeNumber);
                             edit.commit();
                             PushJsonParser jsonParser = new PushJsonParser();
-                            Constants.num = 0;
+                            Constants.check_tab = 0;
                             jsonParser.sendPushMessage("새로운 공지사항이 있습니다.");
                         }
                         break;

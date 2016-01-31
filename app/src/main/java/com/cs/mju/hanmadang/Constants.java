@@ -66,6 +66,7 @@ public class Constants {
     public static final String CLUB_OS = "#os0000";
 
     public static int num = 0;
+    public static int check_tab = 0;
     public static int write = 0;
 
     public static final long CHECK_TIMER = 1800000;

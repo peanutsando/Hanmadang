@@ -29,6 +29,7 @@ public class ClubActivity extends AppCompatActivity {
     ListView listView;
     WriteListAdapter adapter;
 
+
     JSONParser jsonParser = new JSONParser();
 
     @Override
@@ -38,6 +39,7 @@ public class ClubActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Constants.check_tab = 1;
         keyHandler = new BackKeyHandler(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
